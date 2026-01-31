@@ -1,0 +1,15 @@
+name: Rebuild on Docs Update
+
+on:
+  repository_dispatch:
+    types: [docs-updated]
+
+jobs:
+  trigger-cloudflare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Cloudflare Pages rebuild
+        env:
+          DEPLOY_HOOK_URL: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}
+        run: |
+          curl -X POST "$DEPLOY_HOOK_URL"

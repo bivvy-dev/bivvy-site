@@ -1,0 +1,27 @@
+/* Custom Starlight theme to match Bivvy site */
+
+:root {
+  --sl-color-accent-low: #1a2e1a;
+  --sl-color-accent: #c8ff00;
+  --sl-color-accent-high: #e5ff80;
+  --sl-color-white: #f5f5f5;
+  --sl-color-gray-1: #e5e5e5;
+  --sl-color-gray-2: #a0a0a0;
+  --sl-color-gray-3: #666666;
+  --sl-color-gray-4: #333333;
+  --sl-color-gray-5: #1e1e1e;
+  --sl-color-gray-6: #141414;
+  --sl-color-black: #0d0d0d;
+
+  --sl-color-bg: var(--sl-color-black);
+  --sl-color-bg-nav: var(--sl-color-gray-6);
+  --sl-color-bg-sidebar: var(--sl-color-gray-6);
+  --sl-color-hairline-light: rgba(255, 255, 255, 0.08);
+  --sl-color-hairline: rgba(255, 255, 255, 0.12);
+
+  --sl-font: 'Outfit', system-ui, sans-serif;
+  --sl-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap');

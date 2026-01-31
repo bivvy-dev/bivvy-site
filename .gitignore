@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.local
+
+# Synced docs are fetched at build time, but we track a placeholder
+# src/content/docs/  # NOT ignored - placeholder needed for builds
+
+# Astro
+.astro/
+
+# Build output
+dist/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs
+*.log
+
+# Local overrides
+.local
+*.local.*
+
+# Generated files
+*.generated.*

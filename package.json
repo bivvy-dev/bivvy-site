@@ -1,0 +1,23 @@
+{
+  "name": "bivvy-site",
+  "version": "0.1.0",
+  "description": "Marketing site and documentation hub for Bivvy CLI",
+  "type": "module",
+  "scripts": {
+    "sync-docs": "node scripts/sync-docs.cjs",
+    "dev": "astro dev",
+    "build": "npm run sync-docs && astro build",
+    "preview": "astro preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bivvy-dev/bivvy-site.git"
+  },
+  "author": "Bivvy",
+  "license": "MIT",
+  "dependencies": {
+    "@astrojs/starlight": "^0.32.0",
+    "astro": "^5.1.0",
+    "sharp": "^0.33.0"
+  }
+}
