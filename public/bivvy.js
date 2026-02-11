@@ -24,12 +24,6 @@ for (let i = 0; i < config.staticStars; i++) {
   star.className = 'star-static' + (isBright ? ' bright' : '');
   star.style.left = `${Math.random() * 100}%`;
   star.style.top = `${Math.random() * 100}%`;
-  // Size variation: 1px to 3px (matching twinkling star range)
-  const size = 1 + Math.random() * 2;
-  star.style.setProperty('--star-size', `${size}px`);
-  // Opacity variation: 0.5 to 0.9
-  const opacity = 0.5 + Math.random() * 0.4;
-  star.style.setProperty('--star-opacity', opacity);
   starsStatic.appendChild(star);
 }
 
@@ -41,9 +35,6 @@ for (let i = 0; i < config.twinkleStars; i++) {
   star.className = 'star-twinkle';
   star.style.left = `${Math.random() * 100}%`;
   star.style.top = `${Math.random() * 80}%`;
-  // Size variation: 1px to 3px
-  const size = 1 + Math.random() * 2;
-  star.style.setProperty('--star-size', `${size}px`);
   star.style.setProperty('--twinkle-duration', `${4 + Math.random() * 4}s`);
   star.style.setProperty('--twinkle-delay', `${Math.random() * 5}s`);
   starsTwinkle.appendChild(star);
@@ -251,7 +242,7 @@ animate();
 
 // --- COPY BUTTON ---
 document.querySelector('.copy-btn').addEventListener('click', () => {
-  navigator.clipboard.writeText('curl -fsSL https://bivvy.dev/install.sh | sh');
+  navigator.clipboard.writeText('npx bivvy init');
   const btn = document.querySelector('.copy-btn');
   btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>';
   setTimeout(() => {

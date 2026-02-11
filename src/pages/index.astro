@@ -1,0 +1,10 @@
+---
+// Serve the static landing page at / (needed because Starlight's catch-all
+// route intercepts it in dev mode). In production builds, public/index.html
+// would also work, but this ensures consistent behavior.
+import fs from 'node:fs';
+import path from 'node:path';
+
+const html = fs.readFileSync(path.join(process.cwd(), 'public', 'index.html'), 'utf-8');
+---
+<Fragment set:html={html} />
