@@ -3,8 +3,6 @@ title: bivvy run
 description: Run setup workflow
 ---
 
-# bivvy run
-
 The main command to run your setup workflow.
 
 ## Usage

@@ -3,8 +3,6 @@ title: bivvy history
 description: Show execution history
 ---
 
-# bivvy history
-
 Shows the execution history for your project.
 
 ## Usage

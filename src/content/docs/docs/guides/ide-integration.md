@@ -3,8 +3,6 @@ title: IDE Integration
 description: Setting up IDE autocomplete and validation for Bivvy
 ---
 
-# IDE Integration
-
 Bivvy provides a JSON Schema for configuration files to enable
 autocomplete and validation in your IDE.
 

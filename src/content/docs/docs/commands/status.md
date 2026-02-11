@@ -3,8 +3,6 @@ title: bivvy status
 description: Show current setup status
 ---
 
-# bivvy status
-
 Shows the current status of your setup without running anything.
 
 ## Usage

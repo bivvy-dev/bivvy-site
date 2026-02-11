@@ -3,8 +3,6 @@ title: bivvy config
 description: Show resolved configuration
 ---
 
-# bivvy config
-
 Displays the fully resolved configuration after merging all sources.
 
 ## Usage

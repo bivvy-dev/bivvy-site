@@ -3,8 +3,6 @@ title: Install via curl
 description: Installing Bivvy with the curl installer
 ---
 
-# Install via curl
-
 The quickest way to install Bivvy on macOS or Linux.
 
 ## Usage

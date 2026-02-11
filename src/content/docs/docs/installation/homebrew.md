@@ -3,8 +3,6 @@ title: Install via Homebrew
 description: Installing Bivvy with Homebrew
 ---
 
-# Install via Homebrew
-
 The recommended way to install Bivvy on macOS.
 
 ## Installation

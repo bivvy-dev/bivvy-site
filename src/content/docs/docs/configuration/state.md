@@ -1,4 +1,6 @@
-# State Management
+---
+title: "State Management"
+---
 
 Bivvy tracks execution state to enable smart re-runs, skip completed steps, and detect when watched files have changed.
 

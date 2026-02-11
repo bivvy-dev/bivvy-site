@@ -3,8 +3,6 @@ title: bivvy feedback
 description: Capture and manage friction points during development
 ---
 
-# bivvy feedback
-
 Captures and manages feedback entries with automatic session correlation.
 
 ## Usage

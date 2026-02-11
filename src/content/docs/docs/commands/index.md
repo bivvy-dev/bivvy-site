@@ -3,8 +3,6 @@ title: CLI Reference
 description: Bivvy command-line interface reference
 ---
 
-# CLI Reference
-
 Bivvy provides the following commands:
 
 | Command | Description |

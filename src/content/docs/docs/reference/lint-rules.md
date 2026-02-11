@@ -3,8 +3,6 @@ title: Lint Rules Reference
 description: Complete reference for Bivvy's configuration validation rules
 ---
 
-# Lint Rules Reference
-
 Bivvy includes built-in lint rules to validate your configuration.
 Run `bivvy lint` to check your configuration for issues.
 

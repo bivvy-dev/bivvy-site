@@ -3,8 +3,6 @@ title: bivvy last
 description: Show last run information
 ---
 
-# bivvy last
-
 Shows details about the last execution.
 
 ## Usage

@@ -3,8 +3,6 @@ title: bivvy completions
 description: Generate shell completion scripts
 ---
 
-# bivvy completions
-
 Generates shell completion scripts for tab-completion support.
 
 ## Usage

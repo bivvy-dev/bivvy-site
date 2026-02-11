@@ -1,4 +1,6 @@
-# Configuration
+---
+title: "Configuration"
+---
 
 Bivvy uses YAML configuration files to define your project setup.
 

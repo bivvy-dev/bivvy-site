@@ -3,8 +3,6 @@ title: Step Configuration
 description: Configuring setup steps in Bivvy
 ---
 
-# Step Configuration
-
 Steps are the building blocks of Bivvy workflows. Each step represents
 a task to be executed during setup.
 

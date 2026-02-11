@@ -3,8 +3,6 @@ title: Installation
 description: How to install Bivvy
 ---
 
-# Installation
-
 Bivvy can be installed via several methods. All methods install the same
 native binary -- choose whichever fits your workflow.
 

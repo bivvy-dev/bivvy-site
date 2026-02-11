@@ -3,8 +3,6 @@ title: bivvy init
 description: Initialize configuration
 ---
 
-# bivvy init
-
 Initialize Bivvy configuration for your project.
 
 ## Usage

@@ -3,8 +3,6 @@ title: Shell Completions
 description: Setting up tab completions for Bivvy
 ---
 
-# Shell Completions
-
 Bivvy supports tab completions for bash, zsh, fish, and PowerShell.
 
 ## Generate Completions

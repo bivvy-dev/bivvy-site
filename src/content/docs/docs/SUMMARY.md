@@ -1,4 +1,6 @@
-# Documentation Summary
+---
+title: "Documentation Summary"
+---
 
 ## Getting Started
 - [Why Bivvy?](why-bivvy.md)

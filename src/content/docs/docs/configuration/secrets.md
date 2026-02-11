@@ -3,8 +3,6 @@ title: Secret Masking
 description: Configuring automatic secret masking in Bivvy output
 ---
 
-# Secret Masking
-
 Bivvy automatically masks sensitive values in all output to prevent
 accidental exposure of secrets.
 

@@ -1,4 +1,6 @@
-# Why Bivvy?
+---
+title: "Why Bivvy?"
+---
 
 > "Set up your bivvy before the mission."
 

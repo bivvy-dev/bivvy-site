@@ -3,8 +3,6 @@ title: Install via gem
 description: Installing Bivvy with RubyGems
 ---
 
-# Install via gem
-
 Install Bivvy using RubyGems.
 
 ## Installation

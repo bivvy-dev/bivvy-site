@@ -3,8 +3,6 @@ title: CI Integration
 description: Integrating Bivvy lint with CI/CD pipelines
 ---
 
-# CI Integration
-
 Bivvy's lint command supports SARIF output format, which is widely supported
 by CI/CD systems and IDEs for displaying static analysis results.
 

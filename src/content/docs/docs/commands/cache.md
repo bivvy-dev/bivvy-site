@@ -3,8 +3,6 @@ title: bivvy cache
 description: Manage cached templates
 ---
 
-# bivvy cache
-
 Manage the template cache used for remote template sources.
 
 ## Subcommands

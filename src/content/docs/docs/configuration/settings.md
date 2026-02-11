@@ -1,4 +1,6 @@
-# Settings
+---
+title: "Settings"
+---
 
 Global settings control Bivvy's behavior across all workflows.
 

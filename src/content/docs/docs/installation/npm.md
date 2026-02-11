@@ -3,8 +3,6 @@ title: Install via npm
 description: Installing Bivvy with npm
 ---
 
-# Install via npm
-
 Install Bivvy using npm, yarn, or pnpm.
 
 ## Installation

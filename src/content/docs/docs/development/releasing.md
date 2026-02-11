@@ -3,8 +3,6 @@ title: Releasing Bivvy
 description: How to create and publish new Bivvy releases
 ---
 
-# Releasing Bivvy
-
 ## Quick Release
 
 ```bash

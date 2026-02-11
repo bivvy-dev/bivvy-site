@@ -3,8 +3,6 @@ title: Shell Refresh Handling
 description: How Bivvy handles steps that require shell refresh
 ---
 
-# Shell Refresh Handling
-
 Some setup steps modify PATH or environment in ways that require a
 shell reload to take effect. Bivvy detects and handles these situations
 automatically.

@@ -1,4 +1,6 @@
-# Built-in Templates
+---
+title: "Built-in Templates"
+---
 
 Bivvy includes 20 built-in templates for common development tools. When you run `bivvy init`, these are auto-detected based on files in your project.
 

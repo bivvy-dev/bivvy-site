@@ -1,4 +1,6 @@
-# Workflows
+---
+title: "Workflows"
+---
 
 Workflows define which steps run and in what order.
 

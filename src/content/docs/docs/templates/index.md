@@ -1,4 +1,6 @@
-# Templates
+---
+title: "Templates"
+---
 
 Templates define reusable setup steps. Bivvy includes 20 built-in templates covering system package managers, version managers, and language-specific dependency tools. You can also create custom templates.
 

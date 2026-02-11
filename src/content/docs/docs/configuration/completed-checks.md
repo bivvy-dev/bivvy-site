@@ -1,4 +1,6 @@
-# Completed Checks
+---
+title: "Completed Checks"
+---
 
 Completed checks determine if a step has already run successfully. When a check passes, Bivvy skips the step (unless `--force` is used).
 

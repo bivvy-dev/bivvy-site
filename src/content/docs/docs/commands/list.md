@@ -3,8 +3,6 @@ title: bivvy list
 description: List steps and workflows
 ---
 
-# bivvy list
-
 Lists all available steps and workflows in your configuration.
 
 ## Usage

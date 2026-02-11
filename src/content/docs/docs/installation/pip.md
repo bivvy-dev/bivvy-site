@@ -3,8 +3,6 @@ title: Install via pip
 description: Installing Bivvy with pip
 ---
 
-# Install via pip
-
 Install Bivvy using pip.
 
 ## Installation

@@ -3,8 +3,6 @@ title: Install via Cargo
 description: Installing Bivvy with Cargo
 ---
 
-# Install via Cargo
-
 Install Bivvy using Rust's package manager. Best for Rust developers who
 already have the toolchain installed.
 

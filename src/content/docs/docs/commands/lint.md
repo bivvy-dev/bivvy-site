@@ -3,8 +3,6 @@ title: bivvy lint
 description: Validate configuration files
 ---
 
-# bivvy lint
-
 Validates your Bivvy configuration without executing anything.
 
 ## Usage

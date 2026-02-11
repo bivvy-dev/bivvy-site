@@ -3,8 +3,6 @@ title: Remote Template Sources
 description: Configuring remote template repositories
 ---
 
-# Remote Template Sources
-
 Bivvy can fetch templates from remote sources, allowing teams to share
 template repositories and keep templates up-to-date automatically.
 
