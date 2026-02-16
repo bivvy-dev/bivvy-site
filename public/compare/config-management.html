@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bivvy vs Ansible, Chef, & Puppet – Developer environments, not server fleets</title>
+  <meta name="description" content="Configuration management tools manage server infrastructure at scale. Bivvy manages developer laptop environments. Same concept, completely different domain.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛺</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/bivvy.css">
+  <link rel="stylesheet" href="/compare.css">
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">
+      <div class="logo-icon">⛺</div>
+      <span class="logo-text">bivvy</span>
+    </a>
+    <div class="nav-links">
+      <div class="nav-dropdown">
+        <a href="/#features" class="nav-dropdown-trigger">Learn more... <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="nav-dropdown-menu">
+          <a href="/#features">Features</a>
+          <a href="/#demo">How it works</a>
+          <a href="/#proof">In the wild</a>
+          <a href="/#languages">In your stack</a>
+          <a href="/#cta">Get started</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a class="nav-dropdown-trigger">Compare <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="nav-dropdown-menu">
+          <a href="/compare/setup-scripts">vs Setup Scripts</a>
+          <a href="/compare/task-runners">vs Make, Just, & Taskfiles</a>
+          <a href="/compare/nix-devcontainers">vs Nix & Devcontainers</a>
+          <a href="/compare/config-management">vs Ansible, Chef, & Puppet</a>
+          <a href="/compare/backstage">vs Backstage</a>
+        </div>
+      </div>
+      <a href="/docs/">Docs</a>
+      <a href="https://github.com/bivvy-dev/bivvy" target="_blank" class="nav-icon" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </nav>
+
+  <section class="compare-hero">
+    <div class="compare-badge">Comparison</div>
+    <h1>Bivvy <span class="vs">vs</span> Ansible, Chef, & Puppet</h1>
+    <p class="compare-subtitle">
+      Ansible, Chef, and Puppet manage production server fleets. Bivvy manages developer laptops and CI environments. Same philosophy, completely different domain.
+    </p>
+  </section>
+
+  <section class="differentiators">
+    <div class="diff-grid">
+      <div class="diff-card">
+        <div class="diff-icon">💻</div>
+        <h3>Built for developer machines</h3>
+        <p>Config management tools target servers at scale. Bivvy targets one machine at a time &mdash; the developer's laptop. Different constraints, different design.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">🧑‍💻</div>
+        <h3>For developers, not ops</h3>
+        <p>No DSLs to learn. No agent to install. No infrastructure to manage. Bivvy is a CLI that developers run locally. Simple YAML, simple commands.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">🏗️</div>
+        <h3>Project-scoped, not system-wide</h3>
+        <p>Each repo has its own <code>.bivvy/config.yml</code>. Steps install project dependencies, not system-level packages. Multiple projects coexist cleanly.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="compare-table-section">
+    <div class="compare-table-container">
+      <div class="section-label">Feature comparison</div>
+      <h2>Different tools, different domains</h2>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Aspect</th>
+            <th>Bivvy</th>
+            <th>Ansible / Chef / Puppet</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Target</td>
+            <td><span class="check">Developer laptops and CI</span></td>
+            <td><span class="check">Servers and infrastructure</span></td>
+          </tr>
+          <tr>
+            <td>Scale</td>
+            <td><span class="check">One machine at a time</span></td>
+            <td><span class="check">Hundreds/thousands of machines</span></td>
+          </tr>
+          <tr>
+            <td>Agent model</td>
+            <td><span class="check">Local CLI, no agent</span></td>
+            <td><span class="partial">Remote (Ansible) or daemon (Chef/Puppet)</span></td>
+          </tr>
+          <tr>
+            <td>Config language</td>
+            <td><span class="check">Simple YAML with shell commands</span></td>
+            <td><span class="partial">Ansible YAML / Chef Ruby DSL / Puppet DSL</span></td>
+          </tr>
+          <tr>
+            <td>Audience</td>
+            <td><span class="check">Developers and DevEx teams</span></td>
+            <td><span class="check">Ops / SRE / infrastructure teams</span></td>
+          </tr>
+          <tr>
+            <td>State tracking</td>
+            <td><span class="check">Checks completion, runs steps if needed</span></td>
+            <td><span class="check">Converges system to desired state</span></td>
+          </tr>
+          <tr>
+            <td>Interactive mode</td>
+            <td><span class="check">Prompts and confirmations</span></td>
+            <td><span class="absent">Headless execution</span></td>
+          </tr>
+          <tr>
+            <td>Setup required</td>
+            <td><span class="check">Install bivvy, add config file</span></td>
+            <td><span class="absent">Server infrastructure, inventories, roles</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="deep-dive">
+    <div class="deep-dive-block">
+      <div class="deep-dive-text">
+        <div class="section-label">The relationship</div>
+        <h3>Complementary, not competitive</h3>
+        <p>An ops team might use Ansible to provision production servers and bivvy to set up the development environment for the Ansible repository itself.</p>
+        <p>These tools live at different layers. Config management manages infrastructure. Bivvy manages the developer's local environment. The question isn't "which one?" &mdash; it's "which one for what?"</p>
+      </div>
+      <div class="terminal terminal-compact">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <div class="terminal-title">different layers</div>
+        </div>
+        <div class="terminal-body">
+<pre class="terminal-pre"><span class="terminal-comment"># Infrastructure layer (Ansible)</span>
+<span class="terminal-muted">ansible-playbook deploy.yml</span>
+<span class="terminal-muted">  → provisions servers</span>
+<span class="terminal-muted">  → configures networking</span>
+<span class="terminal-muted">  → manages services at scale</span>
+
+<span class="terminal-comment"># Developer layer (Bivvy)</span>
+<span class="terminal-prompt">❯</span> <span class="terminal-cmd">bivvy run</span>
+  <span class="terminal-success">✓</span> Python 3.11 installed
+  <span class="terminal-success">✓</span> Ansible + dependencies installed
+  <span class="terminal-success">✓</span> Vault credentials configured
+  <span class="terminal-success">✓</span> Test inventory ready
+  🎉 <span class="terminal-accent">Ready to develop playbooks!</span></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="compare-cta">
+    <div class="compare-cta-content">
+      <h2>The right tool for developer environments</h2>
+      <p>You wouldn't use Ansible to set up a developer's laptop. And you wouldn't use bivvy to manage a server fleet. Each tool excels in its domain.</p>
+      <div class="btn-row">
+        <a href="/docs/" class="btn btn-primary">Get started →</a>
+        <a href="https://github.com/bivvy-dev/bivvy" class="btn btn-secondary" target="_blank">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="also-compare">
+    <h3>Also compare</h3>
+    <div class="also-compare-links">
+      <a href="/compare/setup-scripts">vs Setup Scripts</a>
+      <a href="/compare/task-runners">vs Make, Just, & Taskfiles</a>
+      <a href="/compare/nix-devcontainers">vs Nix & Devcontainers</a>
+      <a href="/compare/backstage">vs Backstage</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="/docs">Docs</a>
+        <a href="https://github.com/bivvy-dev/bivvy" target="_blank">GitHub</a>
+        <a href="https://github.com/bivvy-dev/bivvy/issues" target="_blank">Issues</a>
+        <a href="/compare/setup-scripts">vs Setup Scripts</a>
+        <a href="/compare/task-runners">vs Make, Just, & Taskfiles</a>
+        <a href="/compare/nix-devcontainers">vs Nix & Devcontainers</a>
+        <a href="/compare/config-management">vs Ansible / Chef / Puppet</a>
+        <a href="/compare/backstage">vs Backstage</a>
+      </div>
+      <div class="footer-copy">
+        Brought to you by ☕ and the bivvy community
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

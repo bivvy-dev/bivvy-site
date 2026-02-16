@@ -40,6 +40,40 @@ for (let i = 0; i < config.twinkleStars; i++) {
   starsTwinkle.appendChild(star);
 }
 
+// --- LAYER 2b: Flickering Stars (JS-driven state cycling, Raycast-style) ---
+const starsFlicker = document.getElementById('stars-flicker');
+const flickerStarCount = 35;
+const flickerStars = [];
+
+for (let i = 0; i < flickerStarCount; i++) {
+  const star = document.createElement('div');
+  star.className = 'star-flicker';
+  star.dataset.state = 'off';
+  const baseOpacity = 0.1 + Math.random() * 0.25;
+  const size = 1 + Math.random() * 1; // 1-2px
+  star.style.setProperty('--transition-duration', '250ms');
+  star.style.setProperty('--star-base-opacity', baseOpacity);
+  star.style.top = `${Math.random() * 100}%`;
+  star.style.left = `${Math.random() * 100}%`;
+  star.style.width = `${size}px`;
+  star.style.height = `${size}px`;
+  starsFlicker.appendChild(star);
+  flickerStars.push(star);
+}
+
+// Stochastic twinkle: randomly activate a few stars, then deactivate after a short delay
+function flickerTwinkle() {
+  const count = 2 + Math.floor(Math.random() * 3); // activate 2-4 stars per tick
+  for (let i = 0; i < count; i++) {
+    const star = flickerStars[Math.floor(Math.random() * flickerStars.length)];
+    star.dataset.state = Math.random() > 0.5 ? 'high' : 'medium';
+    const duration = 200 + Math.random() * 800;
+    setTimeout(() => { star.dataset.state = 'off'; }, duration);
+  }
+}
+
+setInterval(flickerTwinkle, 150);
+
 // --- LAYER 3: Color Blurs with Parallax ---
 const blurs = document.querySelectorAll('.color-blur');
 const blursContainer = document.getElementById('blurs-container');
@@ -225,9 +259,10 @@ function animate() {
   if (blur3) blur3.style.backgroundColor = colors.teal;
   if (blur4) blur4.style.backgroundColor = colors.coral;
 
-  // Dim static stars as user scrolls
+  // Dim static and flicker stars as user scrolls
   const starDim = Math.max(0.15, 1 - scrollPercent * 1.5);
   starsStatic.style.opacity = starDim;
+  starsFlicker.style.opacity = starDim;
 
   // Check for spark triggers
   checkPeriodSpark();

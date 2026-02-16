@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bivvy vs Setup Scripts – Replace bin/setup with something better</title>
+  <meta name="description" content="Bivvy replaces your bin/setup, script/bootstrap, and README-driven setup with declarative, idempotent, shareable environment configuration.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛺</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/bivvy.css">
+  <link rel="stylesheet" href="/compare.css">
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">
+      <div class="logo-icon">⛺</div>
+      <span class="logo-text">bivvy</span>
+    </a>
+    <div class="nav-links">
+      <div class="nav-dropdown">
+        <a href="/#features" class="nav-dropdown-trigger">Learn more... <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="nav-dropdown-menu">
+          <a href="/#features">Features</a>
+          <a href="/#demo">How it works</a>
+          <a href="/#proof">In the wild</a>
+          <a href="/#languages">In your stack</a>
+          <a href="/#cta">Get started</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a class="nav-dropdown-trigger">Compare <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="nav-dropdown-menu">
+          <a href="/compare/setup-scripts">vs Setup Scripts</a>
+          <a href="/compare/task-runners">vs Make, Just, & Taskfiles</a>
+          <a href="/compare/nix-devcontainers">vs Nix & Devcontainers</a>
+          <a href="/compare/config-management">vs Ansible, Chef, & Puppet</a>
+          <a href="/compare/backstage">vs Backstage</a>
+        </div>
+      </div>
+      <a href="/docs/">Docs</a>
+      <a href="https://github.com/bivvy-dev/bivvy" target="_blank" class="nav-icon" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </nav>
+
+  <section class="compare-hero">
+    <div class="compare-badge">Comparison</div>
+    <h1>Bivvy <span class="vs">vs</span> Setup Scripts</h1>
+    <p class="compare-subtitle">
+      Your <code>bin/setup</code> got you this far. Bivvy takes it the rest of the way &mdash; with idempotency, change detection, shared configs, and CI parity baked in.
+    </p>
+  </section>
+
+  <section class="differentiators">
+    <div class="diff-grid">
+      <div class="diff-card">
+        <div class="diff-icon">🔄</div>
+        <h3>Run it again without fear</h3>
+        <p>Setup scripts blindly re-run everything. Bivvy's <code>completed_check</code> detects what's already done and skips it. Safe to run a hundred times.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">👀</div>
+        <h3>Knows when things changed</h3>
+        <p><code>watches</code> tracks your lockfiles. When <code>Gemfile.lock</code> changes, the Ruby step re-runs. When it hasn't, skip. No wasted time.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">🏢</div>
+        <h3>Share across every repo</h3>
+        <p><code>extends:</code> lets your infra team publish a base config. Every repo inherits it. When the base updates, every project picks it up.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="compare-table-section">
+    <div class="compare-table-container">
+      <div class="section-label">Feature comparison</div>
+      <h2>Side by side</h2>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>Bivvy</th>
+            <th>bin/setup</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Idempotent</td>
+            <td><span class="check">Yes &mdash; completed_check skips satisfied steps</span></td>
+            <td><span class="absent">Rarely &mdash; most scripts re-run everything</span></td>
+          </tr>
+          <tr>
+            <td>Change detection</td>
+            <td><span class="check">watches detects changed lockfiles</span></td>
+            <td><span class="absent">None &mdash; runs the same regardless</span></td>
+          </tr>
+          <tr>
+            <td>Shared across repos</td>
+            <td><span class="check">extends: inherits from shared configs</span></td>
+            <td><span class="absent">Each repo has its own script</span></td>
+          </tr>
+          <tr>
+            <td>CI support</td>
+            <td><span class="check">Same config, --non-interactive flag</span></td>
+            <td><span class="absent">Separate workflow file maintained in parallel</span></td>
+          </tr>
+          <tr>
+            <td>Error handling</td>
+            <td><span class="check">depends_on lets independent steps continue</span></td>
+            <td><span class="absent">Stops on first failure</span></td>
+          </tr>
+          <tr>
+            <td>Discoverability</td>
+            <td><span class="check">bivvy status and bivvy list</span></td>
+            <td><span class="absent">Read the script source</span></td>
+          </tr>
+          <tr>
+            <td>Template reuse</td>
+            <td><span class="check">Built-in and remote template libraries</span></td>
+            <td><span class="absent">Copy-paste between repos</span></td>
+          </tr>
+          <tr>
+            <td>Interactive recovery</td>
+            <td><span class="check">Retry, fix, skip, or debug on failure</span></td>
+            <td><span class="absent">Script exits, figure it out</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="deep-dive">
+    <div class="deep-dive-block">
+      <div class="deep-dive-text">
+        <div class="section-label">The problem</div>
+        <h3>Setup scripts rot silently</h3>
+        <p>Every project starts with a fresh <code>bin/setup</code>. Six months later, someone adds a new dependency and forgets to update the script. The README says one thing, the script does another, and CI has its own version of reality.</p>
+        <p>Bivvy's declarative config is the single source of truth. <code>bivvy status</code> shows what's satisfied and what's not &mdash; on any machine, at any time.</p>
+      </div>
+      <div class="terminal terminal-compact">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <div class="terminal-title">bivvy status</div>
+        </div>
+        <div class="terminal-body">
+<pre class="terminal-pre"><span class="terminal-prompt">❯</span> <span class="terminal-cmd">bivvy status</span>
+
+  <span class="terminal-success">[✓]</span> brew         <span class="terminal-comment">2 hours ago</span>
+  <span class="terminal-warning">[!]</span> ruby         <span class="terminal-warning">stale (Gemfile.lock changed)</span>
+  <span class="terminal-success">[✓]</span> node         <span class="terminal-comment">2 hours ago</span>
+  <span class="terminal-success">[✓]</span> docker       <span class="terminal-comment">running</span>
+  <span class="terminal-muted">[pending]</span> db  <span class="terminal-muted">not yet run</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="deep-dive-block reverse">
+      <div class="deep-dive-text">
+        <div class="section-label">The difference</div>
+        <h3>Declarative, not imperative</h3>
+        <p>A setup script says "run these commands in order." Bivvy says "ensure this state exists." The difference matters when you run it the second time, the tenth time, or after pulling new changes.</p>
+        <p><code>completed_check</code> means bivvy knows whether a step's already done. <code>watches</code> means it knows when something changed. The result: fast, correct re-runs instead of "just run the whole thing again."</p>
+      </div>
+      <div class="terminal terminal-compact">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <div class="terminal-title">.bivvy/config.yml</div>
+        </div>
+        <div class="terminal-body">
+<pre class="terminal-pre"><span class="terminal-key">steps</span>:
+  <span class="terminal-key">ruby</span>:
+    <span class="terminal-key">template</span>: bundler
+    <span class="terminal-key">watches</span>: [Gemfile.lock]
+    <span class="terminal-key">completed_check</span>:
+      <span class="terminal-key">command</span>: <span class="terminal-string">"bundle check"</span>
+
+  <span class="terminal-key">node</span>:
+    <span class="terminal-key">template</span>: yarn
+    <span class="terminal-key">watches</span>: [yarn.lock]
+
+  <span class="terminal-key">db</span>:
+    <span class="terminal-key">command</span>: <span class="terminal-string">"rails db:prepare"</span>
+    <span class="terminal-key">depends_on</span>: [ruby, docker]</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="deep-dive-block">
+      <div class="deep-dive-text">
+        <div class="section-label">The upgrade path</div>
+        <h3>From script to config in minutes</h3>
+        <p>You don't have to rewrite anything. Run <code>bivvy init</code> in your project and bivvy detects your stack, generates a config from built-in templates, and works immediately.</p>
+        <p>Your existing setup logic becomes declarative steps with completion checks. Same outcome, better ergonomics. And once it works for one repo, <code>extends:</code> lets you share the pattern across your entire org.</p>
+      </div>
+      <div class="terminal terminal-compact">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <div class="terminal-title">bivvy init</div>
+        </div>
+        <div class="terminal-body">
+<pre class="terminal-pre"><span class="terminal-prompt">❯</span> <span class="terminal-cmd">bivvy init</span>
+
+  ⛺ <span class="terminal-accent">bivvy</span> init
+
+  <span class="terminal-comment"># Detecting project...</span>
+  <span class="terminal-success">✓</span> Ruby 3.2.2 (bundler)
+  <span class="terminal-success">✓</span> Node 20.11.0 (yarn)
+  <span class="terminal-success">✓</span> PostgreSQL (docker-compose)
+
+  <span class="terminal-success">✓</span> Created .bivvy/config.yml
+  <span class="terminal-comment">  3 steps configured from templates</span>
+
+  Run <span class="terminal-cmd">bivvy run</span> to set up.</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="compare-cta">
+    <div class="compare-cta-content">
+      <h2>Ready to retire bin/setup?</h2>
+      <p>Bivvy is what your setup script would be if someone designed it as a product instead of a one-off script.</p>
+      <div class="btn-row">
+        <a href="/docs/" class="btn btn-primary">Get started →</a>
+        <a href="https://github.com/bivvy-dev/bivvy" class="btn btn-secondary" target="_blank">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="also-compare">
+    <h3>Also compare</h3>
+    <div class="also-compare-links">
+      <a href="/compare/task-runners">vs Make, Just, & Taskfiles</a>
+      <a href="/compare/nix-devcontainers">vs Nix & Devcontainers</a>
+      <a href="/compare/config-management">vs Ansible, Chef, & Puppet</a>
+      <a href="/compare/backstage">vs Backstage</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="/docs">Docs</a>
+        <a href="https://github.com/bivvy-dev/bivvy" target="_blank">GitHub</a>
+        <a href="https://github.com/bivvy-dev/bivvy/issues" target="_blank">Issues</a>
+        <a href="/compare/setup-scripts">vs Setup Scripts</a>
+        <a href="/compare/task-runners">vs Make, Just, & Taskfiles</a>
+        <a href="/compare/nix-devcontainers">vs Nix & Devcontainers</a>
+      </div>
+      <div class="footer-copy">
+        Brought to you by ☕ and the bivvy community
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

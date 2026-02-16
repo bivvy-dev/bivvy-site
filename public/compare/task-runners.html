@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bivvy vs Make, Just, & Taskfiles – Environment setup vs task running</title>
+  <meta name="description" content="Task runners execute commands. Bivvy ensures environment state. Understand where Make, Task, and Just end and Bivvy begins.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛺</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/bivvy.css">
+  <link rel="stylesheet" href="/compare.css">
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">
+      <div class="logo-icon">⛺</div>
+      <span class="logo-text">bivvy</span>
+    </a>
+    <div class="nav-links">
+      <div class="nav-dropdown">
+        <a href="/#features" class="nav-dropdown-trigger">Learn more... <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="nav-dropdown-menu">
+          <a href="/#features">Features</a>
+          <a href="/#demo">How it works</a>
+          <a href="/#proof">In the wild</a>
+          <a href="/#languages">In your stack</a>
+          <a href="/#cta">Get started</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a class="nav-dropdown-trigger">Compare <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="nav-dropdown-menu">
+          <a href="/compare/setup-scripts">vs Setup Scripts</a>
+          <a href="/compare/task-runners">vs Make, Just, & Taskfiles</a>
+          <a href="/compare/nix-devcontainers">vs Nix & Devcontainers</a>
+          <a href="/compare/config-management">vs Ansible, Chef, & Puppet</a>
+          <a href="/compare/backstage">vs Backstage</a>
+        </div>
+      </div>
+      <a href="/docs/">Docs</a>
+      <a href="https://github.com/bivvy-dev/bivvy" target="_blank" class="nav-icon" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </nav>
+
+  <section class="compare-hero">
+    <div class="compare-badge">Comparison</div>
+    <h1>Bivvy <span class="vs">vs</span> Make, Just, & Taskfiles</h1>
+    <p class="compare-subtitle">
+      Make, Task, and Just run commands. Bivvy ensures your environment is ready for those commands to succeed. They're complementary, not competitive.
+    </p>
+  </section>
+
+  <section class="differentiators">
+    <div class="diff-grid">
+      <div class="diff-card">
+        <div class="diff-icon">🎯</div>
+        <h3>Different jobs</h3>
+        <p>Task runners are for <em>doing things</em> (build, test, deploy). Bivvy is for <em>ensuring state</em> (this machine has what it needs). You'd use bivvy to set up, then Make to build.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">✅</div>
+        <h3>Beyond file timestamps</h3>
+        <p>Make tracks file modification times. Bivvy's <code>completed_check</code> supports command-based checks, file existence, markers, and more. Real state verification, not heuristics.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">🤝</div>
+        <h3>Built for humans</h3>
+        <p>Task runners are headless. Bivvy has an interactive CLI with prompts, confirmations, and contextual recovery options when things go wrong.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="compare-table-section">
+    <div class="compare-table-container">
+      <div class="section-label">Feature comparison</div>
+      <h2>Side by side</h2>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>Bivvy</th>
+            <th>Make / Task / Just</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Primary purpose</td>
+            <td><span class="check">Ensure environment state</span></td>
+            <td><span class="check">Run project tasks</span></td>
+          </tr>
+          <tr>
+            <td>Completed checks</td>
+            <td><span class="check">Multiple types: command, file, marker</span></td>
+            <td><span class="partial">File-based only (Make) or none</span></td>
+          </tr>
+          <tr>
+            <td>Shared config</td>
+            <td><span class="check">extends: and template_sources:</span></td>
+            <td><span class="absent">Per-repo only</span></td>
+          </tr>
+          <tr>
+            <td>Interactive mode</td>
+            <td><span class="check">Prompts, confirmations, skip/re-run</span></td>
+            <td><span class="absent">Command-line only</span></td>
+          </tr>
+          <tr>
+            <td>CI parity</td>
+            <td><span class="check">Core design goal</span></td>
+            <td><span class="partial">Possible but not the focus</span></td>
+          </tr>
+          <tr>
+            <td>Template registry</td>
+            <td><span class="check">Built-in and remote template libraries</span></td>
+            <td><span class="absent">No</span></td>
+          </tr>
+          <tr>
+            <td>Error recovery</td>
+            <td><span class="check">Retry, fix, skip, or drop to shell</span></td>
+            <td><span class="absent">Task fails, re-run manually</span></td>
+          </tr>
+          <tr>
+            <td>Config language</td>
+            <td><span class="check">Simple YAML</span></td>
+            <td><span class="check">Makefile DSL / YAML / custom</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="deep-dive">
+    <div class="deep-dive-block">
+      <div class="deep-dive-text">
+        <div class="section-label">The distinction</div>
+        <h3>State vs. tasks</h3>
+        <p>A Makefile target says "run this command to produce this file." Bivvy says "ensure this environment state is satisfied." The difference shows up when you ask: "is my machine ready to develop?"</p>
+        <p>Make doesn't know if Ruby is installed. It doesn't know if your <code>.env</code> file exists. It doesn't know if Docker is running. Bivvy does.</p>
+      </div>
+      <div class="terminal terminal-compact">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <div class="terminal-title">bivvy status</div>
+        </div>
+        <div class="terminal-body">
+<pre class="terminal-pre"><span class="terminal-prompt">❯</span> <span class="terminal-cmd">bivvy status</span>
+
+  <span class="terminal-success">[✓]</span> homebrew     <span class="terminal-comment">satisfied</span>
+  <span class="terminal-success">[✓]</span> ruby         <span class="terminal-comment">3.2.2 installed</span>
+  <span class="terminal-success">[✓]</span> node         <span class="terminal-comment">20.11.0 installed</span>
+  <span class="terminal-success">[✓]</span> docker       <span class="terminal-comment">running</span>
+  <span class="terminal-success">[✓]</span> bundler      <span class="terminal-comment">up to date</span>
+  <span class="terminal-success">[✓]</span> yarn         <span class="terminal-comment">up to date</span>
+
+  <span class="terminal-accent">All steps satisfied.</span> Ready to develop.</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="deep-dive-block reverse">
+      <div class="deep-dive-text">
+        <div class="section-label">Better together</div>
+        <h3>Use both</h3>
+        <p>The best workflow uses bivvy and a task runner together. Bivvy handles the environment layer: installing tools, managing dependencies, configuring services. Your Makefile or Justfile handles the task layer: building, testing, linting, deploying.</p>
+        <p>New hire onboarding becomes: <code>bivvy run</code> then <code>make dev</code>. The first ensures the machine is ready. The second starts the work.</p>
+      </div>
+      <div class="terminal terminal-compact">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <div class="terminal-title">workflow</div>
+        </div>
+        <div class="terminal-body">
+<pre class="terminal-pre"><span class="terminal-comment"># Environment layer (bivvy)</span>
+<span class="terminal-prompt">❯</span> <span class="terminal-cmd">bivvy run</span>
+  <span class="terminal-success">✓</span> Ruby 3.2.2 installed
+  <span class="terminal-success">✓</span> Dependencies installed
+  <span class="terminal-success">✓</span> Database ready
+  🎉 <span class="terminal-accent">Setup complete!</span>
+
+<span class="terminal-comment"># Task layer (make/just/task)</span>
+<span class="terminal-prompt">❯</span> <span class="terminal-cmd">make dev</span>
+  Starting development server...
+  <span class="terminal-success">✓</span> Listening on http://localhost:3000</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="compare-cta">
+    <div class="compare-cta-content">
+      <h2>Set up the environment, then run your tasks</h2>
+      <p>Bivvy handles what task runners don't &mdash; ensuring your machine has everything it needs before a single <code>make</code> target runs.</p>
+      <div class="btn-row">
+        <a href="/docs/" class="btn btn-primary">Get started →</a>
+        <a href="https://github.com/bivvy-dev/bivvy" class="btn btn-secondary" target="_blank">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="also-compare">
+    <h3>Also compare</h3>
+    <div class="also-compare-links">
+      <a href="/compare/setup-scripts">vs Setup Scripts</a>
+      <a href="/compare/nix-devcontainers">vs Nix & Devcontainers</a>
+      <a href="/compare/config-management">vs Ansible, Chef, & Puppet</a>
+      <a href="/compare/backstage">vs Backstage</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="/docs">Docs</a>
+        <a href="https://github.com/bivvy-dev/bivvy" target="_blank">GitHub</a>
+        <a href="https://github.com/bivvy-dev/bivvy/issues" target="_blank">Issues</a>
+        <a href="/compare/setup-scripts">vs Setup Scripts</a>
+        <a href="/compare/task-runners">vs Make, Just, & Taskfiles</a>
+        <a href="/compare/nix-devcontainers">vs Nix & Devcontainers</a>
+        <a href="/compare/config-management">vs Ansible, Chef, & Puppet</a>
+        <a href="/compare/backstage">vs Backstage</a>
+      </div>
+      <div class="footer-copy">
+        Brought to you by ☕ and the bivvy community
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

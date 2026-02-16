@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bivvy vs Nix & Devcontainers – Environment reproducibility without the paradigm shift</title>
+  <meta name="description" content="Nix gives you hermetic builds. Devcontainers give you containerized environments. Bivvy gives you practical consistency without changing how you work.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛺</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/bivvy.css">
+  <link rel="stylesheet" href="/compare.css">
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">
+      <div class="logo-icon">⛺</div>
+      <span class="logo-text">bivvy</span>
+    </a>
+    <div class="nav-links">
+      <div class="nav-dropdown">
+        <a href="/#features" class="nav-dropdown-trigger">Learn more... <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="nav-dropdown-menu">
+          <a href="/#features">Features</a>
+          <a href="/#demo">How it works</a>
+          <a href="/#proof">In the wild</a>
+          <a href="/#languages">In your stack</a>
+          <a href="/#cta">Get started</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a class="nav-dropdown-trigger">Compare <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="nav-dropdown-menu">
+          <a href="/compare/setup-scripts">vs Setup Scripts</a>
+          <a href="/compare/task-runners">vs Make, Just, & Taskfiles</a>
+          <a href="/compare/nix-devcontainers">vs Nix & Devcontainers</a>
+          <a href="/compare/config-management">vs Ansible, Chef, & Puppet</a>
+          <a href="/compare/backstage">vs Backstage</a>
+        </div>
+      </div>
+      <a href="/docs/">Docs</a>
+      <a href="https://github.com/bivvy-dev/bivvy" target="_blank" class="nav-icon" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </nav>
+
+  <section class="compare-hero">
+    <div class="compare-badge">Comparison</div>
+    <h1>Bivvy <span class="vs">vs</span> Nix & Devcontainers</h1>
+    <p class="compare-subtitle">
+      Nix and devcontainers solve environment reproducibility by changing how you work. Bivvy solves it by working with what you already have.
+    </p>
+  </section>
+
+  <section class="differentiators">
+    <div class="diff-grid">
+      <div class="diff-card">
+        <div class="diff-icon">📉</div>
+        <h3>Zero learning curve</h3>
+        <p>No Nix language. No flakes. No Docker. Bivvy is YAML and shell commands. If your team can write a README, they can write a bivvy config.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">💻</div>
+        <h3>Your machine, your editor</h3>
+        <p>Devcontainers run inside Docker. Bivvy runs setup steps on your actual machine. Use any editor, any terminal, any workflow you want.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">📦</div>
+        <h3>Drop a YAML file in the repo</h3>
+        <p>No infrastructure to deploy. No daemon to manage. No paradigm to adopt. Add <code>.bivvy/config.yml</code> and you're done.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="compare-table-section">
+    <div class="compare-table-container">
+      <div class="section-label">Feature comparison</div>
+      <h2>Three approaches</h2>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>Bivvy</th>
+            <th>Nix / Devcontainers</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Learning curve</td>
+            <td><span class="check">Low &mdash; YAML and shell commands</span></td>
+            <td><span class="absent">Steep (Nix) / Moderate (Devcontainers)</span></td>
+          </tr>
+          <tr>
+            <td>Reproducibility</td>
+            <td><span class="partial">Practical &mdash; same steps, same checks</span></td>
+            <td><span class="check">Exact (Nix) / Container-level (DC)</span></td>
+          </tr>
+          <tr>
+            <td>How it works</td>
+            <td><span class="check">Runs setup on your existing machine</span></td>
+            <td><span class="partial">Replaces package mgmt (Nix) / Runs in Docker (DC)</span></td>
+          </tr>
+          <tr>
+            <td>Editor support</td>
+            <td><span class="check">Any editor &mdash; it's a CLI</span></td>
+            <td><span class="partial">Requires nix-shell (Nix) / VS Code mainly (DC)</span></td>
+          </tr>
+          <tr>
+            <td>Adoption cost</td>
+            <td><span class="check">Drop a YAML file in the repo</span></td>
+            <td><span class="absent">Team learns Nix / Team uses Docker</span></td>
+          </tr>
+          <tr>
+            <td>Offline support</td>
+            <td><span class="check">After first run, most steps work offline</span></td>
+            <td><span class="check">Full once packages/images are fetched</span></td>
+          </tr>
+          <tr>
+            <td>CI parity</td>
+            <td><span class="check">Same config, --non-interactive</span></td>
+            <td><span class="check">Same nix flake / Same container image</span></td>
+          </tr>
+          <tr>
+            <td>Shared config</td>
+            <td><span class="check">extends: for org-wide inheritance</span></td>
+            <td><span class="partial">Shared flakes / Base images</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="deep-dive">
+    <div class="deep-dive-block">
+      <div class="deep-dive-text">
+        <div class="section-label">The trade-off</div>
+        <h3>Perfect vs. practical</h3>
+        <p>Nix gives you hermetic, bit-for-bit reproducible environments. That's genuinely impressive. It also requires your entire team to learn a functional programming language for package management.</p>
+        <p>Bivvy gives you practical consistency: the same setup steps run the same way on every machine. It's not hermetic, but it catches 95% of "works on my machine" issues with 5% of the adoption cost.</p>
+      </div>
+      <div class="terminal terminal-compact">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <div class="terminal-title">.bivvy/config.yml</div>
+        </div>
+        <div class="terminal-body">
+<pre class="terminal-pre"><span class="terminal-comment"># This is the entire config.</span>
+<span class="terminal-comment"># No new language to learn.</span>
+
+<span class="terminal-key">steps</span>:
+  <span class="terminal-key">ruby</span>:
+    <span class="terminal-key">template</span>: bundler
+    <span class="terminal-key">watches</span>: [Gemfile.lock]
+
+  <span class="terminal-key">node</span>:
+    <span class="terminal-key">template</span>: yarn
+    <span class="terminal-key">watches</span>: [yarn.lock]
+
+  <span class="terminal-key">services</span>:
+    <span class="terminal-key">command</span>: <span class="terminal-string">"docker compose up -d"</span>
+    <span class="terminal-key">completed_check</span>:
+      <span class="terminal-key">command</span>: <span class="terminal-string">"docker compose ps --status running"</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="deep-dive-block reverse">
+      <div class="deep-dive-text">
+        <div class="section-label">The reality</div>
+        <h3>Most teams don't need hermetic</h3>
+        <p>Devcontainers work well if your team uses VS Code and doesn't mind developing inside Docker. But many developers have strong preferences about their editor, terminal, and workflow.</p>
+        <p>Bivvy respects those preferences. It sets up your machine the way you want it &mdash; with the tools you chose, in the editor you prefer. No containers between you and your code.</p>
+      </div>
+      <div class="terminal terminal-compact">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <div class="terminal-title">bivvy — new laptop</div>
+        </div>
+        <div class="terminal-body">
+<pre class="terminal-pre"><span class="terminal-prompt">❯</span> <span class="terminal-cmd">git clone myapp && cd myapp</span>
+<span class="terminal-prompt">❯</span> <span class="terminal-cmd">bivvy run</span>
+
+  ⛺ <span class="terminal-accent">bivvy</span> v1.2.0
+
+  <span class="terminal-success">✓</span> Ruby 3.2.2 via mise
+  <span class="terminal-success">✓</span> Bundled gems installed
+  <span class="terminal-success">✓</span> Node 20.11.0 via mise
+  <span class="terminal-success">✓</span> Yarn packages installed
+  <span class="terminal-success">✓</span> Docker services started
+  <span class="terminal-success">✓</span> Database created & migrated
+
+  🎉 <span class="terminal-accent">Setup complete!</span>
+  <span class="terminal-comment">  Open in any editor you like.</span></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="compare-cta">
+    <div class="compare-cta-content">
+      <h2>Consistency without the paradigm shift</h2>
+      <p>For most teams, "practical" reproducibility is enough &mdash; and the adoption cost is what matters. Bivvy gets you there with YAML, not Nix.</p>
+      <div class="btn-row">
+        <a href="/docs/" class="btn btn-primary">Get started →</a>
+        <a href="https://github.com/bivvy-dev/bivvy" class="btn btn-secondary" target="_blank">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="also-compare">
+    <h3>Also compare</h3>
+    <div class="also-compare-links">
+      <a href="/compare/setup-scripts">vs Setup Scripts</a>
+      <a href="/compare/task-runners">vs Make, Just, & Taskfiles</a>
+      <a href="/compare/config-management">vs Ansible, Chef, & Puppet</a>
+      <a href="/compare/backstage">vs Backstage</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="/docs">Docs</a>
+        <a href="https://github.com/bivvy-dev/bivvy" target="_blank">GitHub</a>
+        <a href="https://github.com/bivvy-dev/bivvy/issues" target="_blank">Issues</a>
+        <a href="/compare/setup-scripts">vs Setup Scripts</a>
+        <a href="/compare/task-runners">vs Make, Just, & Taskfiles</a>
+        <a href="/compare/nix-devcontainers">vs Nix & Devcontainers</a>
+        <a href="/compare/config-management">vs Ansible, Chef, & Puppet</a>
+        <a href="/compare/backstage">vs Backstage</a>
+      </div>
+      <div class="footer-copy">
+        Brought to you by ☕ and the bivvy community
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

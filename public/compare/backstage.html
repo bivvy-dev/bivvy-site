@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bivvy vs Backstage – Environment setup without the platform overhead</title>
+  <meta name="description" content="Backstage is a full internal developer platform. Bivvy is a CLI that makes your dev environment work. Different scale, different problem, complementary tools.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛺</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/bivvy.css">
+  <link rel="stylesheet" href="/compare.css">
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">
+      <div class="logo-icon">⛺</div>
+      <span class="logo-text">bivvy</span>
+    </a>
+    <div class="nav-links">
+      <div class="nav-dropdown">
+        <a href="/#features" class="nav-dropdown-trigger">Learn more... <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="nav-dropdown-menu">
+          <a href="/#features">Features</a>
+          <a href="/#demo">How it works</a>
+          <a href="/#proof">In the wild</a>
+          <a href="/#languages">In your stack</a>
+          <a href="/#cta">Get started</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a class="nav-dropdown-trigger">Compare <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="nav-dropdown-menu">
+          <a href="/compare/setup-scripts">vs Setup Scripts</a>
+          <a href="/compare/task-runners">vs Make, Just, & Taskfiles</a>
+          <a href="/compare/nix-devcontainers">vs Nix & Devcontainers</a>
+          <a href="/compare/config-management">vs Ansible, Chef, & Puppet</a>
+          <a href="/compare/backstage">vs Backstage</a>
+        </div>
+      </div>
+      <a href="/docs/">Docs</a>
+      <a href="https://github.com/bivvy-dev/bivvy" target="_blank" class="nav-icon" aria-label="GitHub">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+    </div>
+  </nav>
+
+  <section class="compare-hero">
+    <div class="compare-badge">Comparison</div>
+    <h1>Bivvy <span class="vs">vs</span> Backstage</h1>
+    <p class="compare-subtitle">
+      Backstage is a full internal developer platform you deploy and maintain. Bivvy is a CLI tool you drop into a repo. They solve different layers of the developer experience.
+    </p>
+  </section>
+
+  <section class="differentiators">
+    <div class="diff-grid">
+      <div class="diff-card">
+        <div class="diff-icon">🏗️</div>
+        <h3>Zero infrastructure</h3>
+        <p>Backstage is a React app you deploy on servers with a database and plugin ecosystem. Bivvy is a single binary. Install it, add a config file, done.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">🧩</div>
+        <h3>Different layers</h3>
+        <p>Backstage answers "what services exist and who owns them." Bivvy answers "now make this one work on my machine." They're complementary, not competitive.</p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">🎯</div>
+        <h3>For teams that can't justify a platform</h3>
+        <p>Most teams don't need a full internal developer portal. They need their setup scripts to stop breaking. Bivvy gives you environment consistency without the platform overhead.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="compare-table-section">
+    <div class="compare-table-container">
+      <div class="section-label">Feature comparison</div>
+      <h2>Different scale, different problem</h2>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>Bivvy</th>
+            <th>Backstage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Local env setup</td>
+            <td><span class="check">Core purpose &mdash; install deps, run setup, ensure state</span></td>
+            <td><span class="absent">Not in scope</span></td>
+          </tr>
+          <tr>
+            <td>Declarative state</td>
+            <td><span class="check">Completed checks, watches, idempotent re-runs</span></td>
+            <td><span class="absent">Not in scope</span></td>
+          </tr>
+          <tr>
+            <td>Service catalog</td>
+            <td><span class="absent">Not in scope</span></td>
+            <td><span class="check">Inventory of all services, ownership, health</span></td>
+          </tr>
+          <tr>
+            <td>Project scaffolding</td>
+            <td><span class="absent">Not in scope</span></td>
+            <td><span class="check">Software templates for new services</span></td>
+          </tr>
+          <tr>
+            <td>Plugin ecosystem</td>
+            <td><span class="partial">Template libraries</span></td>
+            <td><span class="check">PagerDuty, Datadog, Kubernetes, CI/CD, etc.</span></td>
+          </tr>
+          <tr>
+            <td>Infrastructure required</td>
+            <td><span class="check">None &mdash; CLI runs locally</span></td>
+            <td><span class="absent">Servers, database, deployment pipeline</span></td>
+          </tr>
+          <tr>
+            <td>Shared config</td>
+            <td><span class="check">extends: for org-wide inheritance</span></td>
+            <td><span class="check">Centralized catalog and templates</span></td>
+          </tr>
+          <tr>
+            <td>Time to value</td>
+            <td><span class="check">Minutes &mdash; install CLI, add config</span></td>
+            <td><span class="absent">Weeks/months &mdash; deploy, configure, adopt</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="deep-dive">
+    <div class="deep-dive-block">
+      <div class="deep-dive-text">
+        <div class="section-label">The gap</div>
+        <h3>Most teams live between "setup scripts" and "platform"</h3>
+        <p>There's a huge gap between cobbled-together setup scripts and a full Backstage deployment. Most teams live in that gap: too many repos for manual setup, not enough scale to justify a platform.</p>
+        <p>Bivvy fills exactly this space. <code>extends:</code> and <code>template_sources:</code> give you org-wide environment management without deploying infrastructure. One YAML file per repo, one shared base config for consistency.</p>
+      </div>
+      <div class="terminal terminal-compact">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <div class="terminal-title">.bivvy/config.yml</div>
+        </div>
+        <div class="terminal-body">
+<pre class="terminal-pre"><span class="terminal-comment"># Inherit the company base config</span>
+<span class="terminal-key">extends</span>: <span class="terminal-string">"https://internal.co/bivvy/base.yml"</span>
+
+<span class="terminal-comment"># Use company-approved templates</span>
+<span class="terminal-key">template_sources</span>:
+  <span class="terminal-key">company</span>: <span class="terminal-string">"https://internal.co/bivvy/templates"</span>
+
+<span class="terminal-comment"># Project-specific steps</span>
+<span class="terminal-key">steps</span>:
+  <span class="terminal-key">ruby</span>:
+    <span class="terminal-key">template</span>: company/ruby-service
+  <span class="terminal-key">db</span>:
+    <span class="terminal-key">template</span>: company/postgres</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="deep-dive-block reverse">
+      <div class="deep-dive-text">
+        <div class="section-label">Together</div>
+        <h3>Backstage catalogs it, bivvy sets it up</h3>
+        <p>If your team does run Backstage, bivvy slots right in. A developer finds a service in the Backstage catalog, clones it, and runs <code>bivvy run</code> to get a working environment. Backstage handles discovery and documentation. Bivvy handles the local machine.</p>
+        <p>For teams that can't justify Backstage, bivvy gives you the environment consistency piece &mdash; the part developers feel every day &mdash; without the platform overhead.</p>
+      </div>
+      <div class="terminal terminal-compact">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <div class="terminal-title">developer workflow</div>
+        </div>
+        <div class="terminal-body">
+<pre class="terminal-pre"><span class="terminal-comment"># Found the service in Backstage</span>
+<span class="terminal-prompt">❯</span> <span class="terminal-cmd">git clone payments-api && cd payments-api</span>
+
+<span class="terminal-comment"># Bivvy takes it from here</span>
+<span class="terminal-prompt">❯</span> <span class="terminal-cmd">bivvy run</span>
+
+  ⛺ <span class="terminal-accent">bivvy</span> v1.2.0
+  <span class="terminal-comment">  extends: company base config</span>
+
+  <span class="terminal-success">✓</span> Ruby 3.2.2 via mise
+  <span class="terminal-success">✓</span> Gems installed
+  <span class="terminal-success">✓</span> PostgreSQL running
+  <span class="terminal-success">✓</span> Redis running
+  <span class="terminal-success">✓</span> Database migrated
+  <span class="terminal-success">✓</span> .env configured
+
+  🎉 <span class="terminal-accent">Setup complete!</span></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="compare-cta">
+    <div class="compare-cta-content">
+      <h2>Environment consistency without the platform</h2>
+      <p>You don't need to deploy infrastructure to make developer setup consistent. Bivvy gives you the piece that matters most &mdash; working environments on every machine &mdash; with a single CLI tool.</p>
+      <div class="btn-row">
+        <a href="/docs/" class="btn btn-primary">Get started →</a>
+        <a href="https://github.com/bivvy-dev/bivvy" class="btn btn-secondary" target="_blank">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="also-compare">
+    <h3>Also compare</h3>
+    <div class="also-compare-links">
+      <a href="/compare/setup-scripts">vs Setup Scripts</a>
+      <a href="/compare/task-runners">vs Make, Just, & Taskfiles</a>
+      <a href="/compare/nix-devcontainers">vs Nix & Devcontainers</a>
+      <a href="/compare/config-management">vs Ansible, Chef, & Puppet</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="/docs">Docs</a>
+        <a href="https://github.com/bivvy-dev/bivvy" target="_blank">GitHub</a>
+        <a href="https://github.com/bivvy-dev/bivvy/issues" target="_blank">Issues</a>
+        <a href="/compare/setup-scripts">vs Setup Scripts</a>
+        <a href="/compare/task-runners">vs Make, Just, & Taskfiles</a>
+        <a href="/compare/nix-devcontainers">vs Nix & Devcontainers</a>
+        <a href="/compare/config-management">vs Ansible, Chef, & Puppet</a>
+        <a href="/compare/backstage">vs Backstage</a>
+      </div>
+      <div class="footer-copy">
+        Brought to you by ☕ and the bivvy community
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

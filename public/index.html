@@ -11,15 +11,16 @@
   <link rel="stylesheet" href="bivvy.css?v=2">
 </head>
 <body>
-  <!-- ========================================
-       ATMOSPHERE SYSTEM
-       ======================================== -->
+  <!-- ATMOSPHERE SYSTEM -->
   <div class="atmosphere">
     <!-- Layer 1: Static stars (dimmable by scroll) -->
     <div class="stars-static" id="stars-static"></div>
 
     <!-- Layer 2: Twinkling stars (sparse) -->
     <div class="stars-twinkle" id="stars-twinkle"></div>
+
+    <!-- Layer 2b: Flickering stars (JS-driven state cycling) -->
+    <div class="stars-flicker" id="stars-flicker"></div>
 
     <!-- Layer 3: Floating color blurs (mouse parallax + scroll color shift) -->
     <div class="blurs-container" id="blurs-container">
@@ -44,6 +45,16 @@
           <a href="#proof">In the wild</a>
           <a href="#languages">In your stack</a>
           <a href="#cta">Get started</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a class="nav-dropdown-trigger">Compare <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+        <div class="nav-dropdown-menu">
+          <a href="/compare/setup-scripts">vs Setup Scripts</a>
+          <a href="/compare/task-runners">vs Make, Just, & Taskfiles</a>
+          <a href="/compare/nix-devcontainers">vs Nix & Devcontainers</a>
+          <a href="/compare/config-management">vs Ansible, Chef, & Puppet</a>
+          <a href="/compare/backstage">vs Backstage</a>
         </div>
       </div>
       <a href="/docs/">Docs</a>
@@ -296,6 +307,11 @@ How do you want to proceed?
         <a href="/docs">Docs</a>
         <a href="https://github.com/bivvy-dev/bivvy" target="_blank">GitHub</a>
         <a href="https://github.com/bivvy-dev/bivvy/issues" target="_blank">Issues</a>
+        <a href="/compare/setup-scripts">vs Setup Scripts</a>
+        <a href="/compare/task-runners">vs Make, Just, & Taskfiles</a>
+        <a href="/compare/nix-devcontainers">vs Nix & Devcontainers</a>
+        <a href="/compare/config-management">vs Ansible, Chef, & Puppet</a>
+        <a href="/compare/backstage">vs Backstage</a>
       </div>
       <div class="footer-copy">
         Brought to you by ☕ and the bivvy community

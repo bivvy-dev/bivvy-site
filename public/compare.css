@@ -1,0 +1,411 @@
+/* ========================================
+   COMPARISON PAGES
+   ======================================== */
+
+/* Comparison Hero */
+.compare-hero {
+  padding: 10rem 2rem 5rem;
+  text-align: center;
+  position: relative;
+}
+
+.compare-hero .compare-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-tertiary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent-lime);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 2rem;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.compare-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-weight: 400;
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 0.6s ease-out 0.1s both;
+}
+
+.compare-hero h1 .vs {
+  color: var(--text-muted);
+  font-size: 0.6em;
+  display: block;
+  font-family: var(--font-mono);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  margin: 0.25rem 0;
+}
+
+.compare-hero .compare-subtitle {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  max-width: 640px;
+  margin: 0 auto 2.5rem;
+  font-weight: 300;
+  line-height: 1.7;
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+/* Differentiators */
+.differentiators {
+  padding: 0 2rem 6rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.diff-card {
+  background: var(--bg-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.diff-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gradient-rainbow);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.diff-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.diff-card:hover::before {
+  opacity: 1;
+}
+
+.diff-icon {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.diff-card h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.diff-card p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* Comparison Table */
+.compare-table-section {
+  padding: 6rem 2rem;
+  background: var(--bg-secondary);
+}
+
+.compare-table-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.compare-table-section .section-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent-lime);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+}
+
+.compare-table-section h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 3rem;
+}
+
+.compare-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.compare-table thead th {
+  background: var(--bg-tertiary);
+  padding: 1.25rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.compare-table thead th:first-child {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+}
+
+.compare-table thead th:nth-child(2) {
+  color: var(--accent-lime);
+}
+
+.compare-table thead th:nth-child(3) {
+  color: var(--text-secondary);
+}
+
+.compare-table tbody td {
+  padding: 1rem 1.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.compare-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.compare-table tbody td:first-child {
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.compare-table tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.compare-table .check {
+  color: var(--accent-teal);
+}
+
+.compare-table .partial {
+  color: #fbbf24;
+}
+
+.compare-table .absent {
+  color: var(--text-muted);
+}
+
+/* Deep Dive Sections */
+.deep-dive {
+  padding: 6rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.deep-dive + .deep-dive {
+  padding-top: 0;
+}
+
+.deep-dive-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-bottom: 6rem;
+}
+
+.deep-dive-block:last-child {
+  margin-bottom: 0;
+}
+
+.deep-dive-block.reverse {
+  direction: rtl;
+}
+
+.deep-dive-block.reverse > * {
+  direction: ltr;
+}
+
+.deep-dive-text .section-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent-lime);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+}
+
+.deep-dive-text h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  margin-bottom: 1.25rem;
+}
+
+.deep-dive-text p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.deep-dive-text p:last-child {
+  margin-bottom: 0;
+}
+
+.deep-dive-text code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  color: var(--accent-lime);
+}
+
+/* Comparison CTA */
+.compare-cta {
+  padding: 8rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.compare-cta::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: var(--gradient-rainbow);
+  filter: blur(150px);
+  opacity: 0.1;
+  border-radius: 50%;
+}
+
+.compare-cta-content {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.compare-cta h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 1.5rem;
+}
+
+.compare-cta p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+  line-height: 1.7;
+}
+
+.compare-cta .btn-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Also Compare Section */
+.also-compare {
+  padding: 0 2rem 6rem;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.also-compare h3 {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 1.5rem;
+}
+
+.also-compare-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.also-compare-links a {
+  background: var(--bg-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.6rem 1.25rem;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.also-compare-links a:hover {
+  border-color: var(--accent-lime);
+  color: var(--text-primary);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .diff-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .deep-dive-block,
+  .deep-dive-block.reverse {
+    grid-template-columns: 1fr;
+    direction: ltr;
+  }
+
+  .compare-table-container {
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .compare-hero {
+    padding: 7rem 1.5rem 3rem;
+  }
+
+  .differentiators {
+    padding: 0 1.5rem 4rem;
+  }
+
+  .compare-table-section {
+    padding: 4rem 1.5rem;
+  }
+
+  .deep-dive {
+    padding: 4rem 1.5rem;
+  }
+
+  .compare-cta {
+    padding: 5rem 1.5rem;
+  }
+
+  .also-compare {
+    padding: 0 1.5rem 4rem;
+  }
+}
