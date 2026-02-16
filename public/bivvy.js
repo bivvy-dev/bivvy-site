@@ -40,7 +40,7 @@ for (let i = 0; i < config.twinkleStars; i++) {
   starsTwinkle.appendChild(star);
 }
 
-// --- LAYER 2b: Flickering Stars (JS-driven state cycling, Raycast-style) ---
+// --- LAYER 2b: Flickering Stars (JS-driven state cycling) ---
 const starsFlicker = document.getElementById('stars-flicker');
 const flickerStarCount = 35;
 const flickerStars = [];
@@ -49,9 +49,9 @@ for (let i = 0; i < flickerStarCount; i++) {
   const star = document.createElement('div');
   star.className = 'star-flicker';
   star.dataset.state = 'off';
-  const baseOpacity = 0.1 + Math.random() * 0.25;
-  const size = 1 + Math.random() * 1; // 1-2px
-  star.style.setProperty('--transition-duration', '250ms');
+  const baseOpacity = 0.05 + Math.random() * 0.2;
+  const size = 1 + Math.random() * 1.5;
+  star.style.setProperty('--transition-duration', `${150 + Math.random() * 400}ms`);
   star.style.setProperty('--star-base-opacity', baseOpacity);
   star.style.top = `${Math.random() * 100}%`;
   star.style.left = `${Math.random() * 100}%`;
@@ -61,18 +61,52 @@ for (let i = 0; i < flickerStarCount; i++) {
   flickerStars.push(star);
 }
 
-// Stochastic twinkle: randomly activate a few stars, then deactivate after a short delay
+// Erratic flicker: variable timing, occasional bursts, multi-step fades
 function flickerTwinkle() {
-  const count = 2 + Math.floor(Math.random() * 3); // activate 2-4 stars per tick
+  const r = Math.random();
+  // Occasionally do nothing (creates pauses)
+  if (r < 0.12) {
+    scheduleNext();
+    return;
+  }
+  // Occasional burst: light up more stars at once
+  const count = r > 0.85 ? 4 + Math.floor(Math.random() * 4) : 1 + Math.floor(Math.random() * 3);
+
   for (let i = 0; i < count; i++) {
     const star = flickerStars[Math.floor(Math.random() * flickerStars.length)];
-    star.dataset.state = Math.random() > 0.5 ? 'high' : 'medium';
-    const duration = 200 + Math.random() * 800;
-    setTimeout(() => { star.dataset.state = 'off'; }, duration);
+    // Vary transition speed per activation
+    star.style.setProperty('--transition-duration', `${80 + Math.random() * 500}ms`);
+
+    const intensity = Math.random();
+    if (intensity > 0.7) {
+      star.dataset.state = 'high';
+    } else if (intensity > 0.3) {
+      star.dataset.state = 'medium';
+    } else {
+      star.dataset.state = 'low';
+    }
+
+    const holdTime = 100 + Math.random() * 1200;
+
+    // Sometimes do a multi-step fade instead of snapping off
+    if (Math.random() > 0.6 && star.dataset.state === 'high') {
+      setTimeout(() => { star.dataset.state = 'medium'; }, holdTime * 0.5);
+      setTimeout(() => { star.dataset.state = 'low'; }, holdTime * 0.8);
+      setTimeout(() => { star.dataset.state = 'off'; }, holdTime);
+    } else {
+      setTimeout(() => { star.dataset.state = 'off'; }, holdTime);
+    }
   }
+  scheduleNext();
 }
 
-setInterval(flickerTwinkle, 150);
+function scheduleNext() {
+  // Variable delay: mostly fast, occasional longer pauses
+  const delay = Math.random() < 0.15 ? 300 + Math.random() * 500 : 60 + Math.random() * 200;
+  setTimeout(flickerTwinkle, delay);
+}
+
+flickerTwinkle();
 
 // --- LAYER 3: Color Blurs with Parallax ---
 const blurs = document.querySelectorAll('.color-blur');

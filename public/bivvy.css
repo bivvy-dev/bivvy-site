@@ -336,6 +336,43 @@ nav::before {
   50% { opacity: 0.8; transform: scale(1.2); }
 }
 
+/* --- LAYER 2b: Flickering stars (JS-driven state cycling) --- */
+.stars-flicker {
+  position: absolute;
+  width: 100%;
+  height: 200%;
+  top: 0;
+  left: 0;
+  transition: opacity 0.8s ease;
+}
+
+.star-flicker {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: var(--star-base-opacity, 0.15);
+  transition: opacity var(--transition-duration, 250ms) ease;
+}
+
+.star-flicker[data-state="low"] {
+  opacity: 0.3;
+}
+
+.star-flicker[data-state="medium"] {
+  opacity: 0.55;
+  box-shadow: 0 0 2px rgba(255, 255, 255, 0.25);
+}
+
+.star-flicker[data-state="high"] {
+  opacity: 0.9;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.45);
+}
+
+.star-flicker[data-state="off"] {
+  opacity: var(--star-base-opacity, 0.15);
+  box-shadow: none;
+}
+
 /* --- LAYER 3: Floating color blurs --- */
 .blurs-container {
   position: absolute;
