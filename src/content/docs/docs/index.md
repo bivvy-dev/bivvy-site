@@ -206,7 +206,7 @@ That's bivvy.
 
 ```bash
 # Install (pick one)
-curl -fsSL https://bivvy.dev/install.sh | sh   # Quick install (macOS/Linux)
+curl -fsSL https://bivvy.dev/install | sh       # Quick install (macOS/Linux)
 brew install bivvy-dev/bivvy/bivvy               # Homebrew
 cargo install bivvy                              # Cargo
 npm install -g bivvy-cli                         # npm

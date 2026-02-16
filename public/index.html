@@ -41,6 +41,7 @@
         <div class="nav-dropdown-menu">
           <a href="#features">Features</a>
           <a href="#demo">How it works</a>
+          <a href="#proof">In the wild</a>
           <a href="#languages">In your stack</a>
           <a href="#cta">Get started</a>
         </div>
@@ -59,8 +60,11 @@
 
   <section class="hero">
     <div class="hero-content">
-      <div class="hero-badge">
-        <span>✦</span> Open source CLI tool
+      <div class="hero-badge tooltip-trigger">
+        <span>✦</span> Source-available CLI tool
+        <div class="badge-tooltip">
+          You can use Bivvy in personal and work projects. The only restriction is you can't offer a competing "Bivvy-as-a-service" during the initial 2-year period. <a href="/docs/license">See more on licensing</a>.
+        </div>
       </div>
       <h1>Dev setup,<br><span class="highlight">automated.</span></h1>
       <p class="hero-subtitle">
@@ -78,7 +82,7 @@
       </div>
       <div class="install-cmd">
         <code>
-          <span>$</span> curl -fsSL https://bivvy.dev/install.sh | sh
+          <span>$</span> curl -fsSL https://bivvy.dev/install | sh
           <button class="copy-btn" title="Copy to clipboard">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
           </button>
@@ -94,7 +98,7 @@
       <div class="feature-card">
         <div class="feature-icon">📋</div>
         <h3 data-spark="lime">Declarative YAML Config</h3>
-        <p>Define your entire dev environment in a single, readable bivvy.yaml file. Version it, share it, forget about it.</p>
+        <p>Define your entire dev environment in a single, readable .bivvy/config.yml file. Version it, share it, forget about it.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🎯</div>
@@ -120,7 +124,7 @@
         <div class="section-label">How it works</div>
         <h2>From clone to coding in seconds</h2>
         <p>
-          Bivvy reads your project's bivvy.yaml config and walks through each
+          Bivvy reads your project's .bivvy/config.yml and walks through each
           setup step interactively. Dependencies, environment variables,
           databases, services—all handled.
         </p>
@@ -140,7 +144,7 @@
         </div>
         <div class="terminal-body">
           <div class="terminal-line">
-            <span class="terminal-prompt">❯</span> <span class="terminal-cmd">bivvy setup</span>
+            <span class="terminal-prompt">❯</span> <span class="terminal-cmd">bivvy run</span>
           </div>
           <div class="terminal-line terminal-output">
             <br>
@@ -148,7 +152,7 @@
           </div>
           <div class="terminal-line terminal-output"><br></div>
           <div class="terminal-line terminal-comment">
-            # Reading bivvy.yaml...
+            # Reading .bivvy/config.yml...
           </div>
           <div class="terminal-line terminal-output"><br></div>
           <div class="terminal-line terminal-success">
@@ -175,6 +179,86 @@
     </div>
   </section>
 
+  <section class="proof" id="proof">
+    <div class="proof-container">
+      <div class="section-label">Built for real workflows</div>
+      <h2 class="section-title">Not just another setup script<span class="spark-period">.</span></h2>
+      <div class="proof-grid">
+
+        <div class="proof-card">
+          <h3>Declarative config</h3>
+          <p>Templates, watches, dependencies, workflows. One file, version-controlled.</p>
+          <div class="terminal terminal-compact">
+            <div class="terminal-header">
+              <div class="terminal-dot red"></div>
+              <div class="terminal-dot yellow"></div>
+              <div class="terminal-dot green"></div>
+              <div class="terminal-title">.bivvy/config.yml</div>
+            </div>
+            <div class="terminal-body">
+<pre class="terminal-pre"><span class="terminal-comment"># .bivvy/config.yml</span>
+<span class="terminal-key">steps</span>:
+  <span class="terminal-key">ruby</span>:
+    <span class="terminal-key">template</span>: bundler
+    <span class="terminal-key">watches</span>: [Gemfile.lock]
+  <span class="terminal-key">node</span>:
+    <span class="terminal-key">template</span>: yarn
+    <span class="terminal-key">watches</span>: [yarn.lock]
+  <span class="terminal-key">db</span>:
+    <span class="terminal-key">command</span>: <span class="terminal-string">"rails db:prepare"</span>
+    <span class="terminal-key">depends_on</span>: [docker]</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="proof-card">
+          <h3>Stale detection</h3>
+          <p>Changed <code>Gemfile.lock</code>? Ruby step is stale. Didn't change it? Skip.</p>
+          <div class="terminal terminal-compact">
+            <div class="terminal-header">
+              <div class="terminal-dot red"></div>
+              <div class="terminal-dot yellow"></div>
+              <div class="terminal-dot green"></div>
+              <div class="terminal-title">bivvy status</div>
+            </div>
+            <div class="terminal-body">
+<pre class="terminal-pre"><span class="terminal-prompt">❯</span> <span class="terminal-cmd">bivvy status</span>
+
+  <span class="terminal-success">[✓]</span> brew         <span class="terminal-comment">2 hours ago</span>
+  <span class="terminal-warning">[!]</span> ruby         <span class="terminal-warning">stale (Gemfile.lock changed)</span>
+  <span class="terminal-success">[✓]</span> node         <span class="terminal-comment">2 hours ago</span>
+  <span class="terminal-success">[✓]</span> docker       <span class="terminal-comment">running</span>
+  <span class="terminal-muted">[pending]</span> db  <span class="terminal-muted">not yet run</span></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="proof-card">
+          <h3>Smart recovery</h3>
+          <p>When something breaks, context-aware suggestions. Not "figure it out yourself."</p>
+          <div class="terminal terminal-compact">
+            <div class="terminal-header">
+              <div class="terminal-dot red"></div>
+              <div class="terminal-dot yellow"></div>
+              <div class="terminal-dot green"></div>
+              <div class="terminal-title">bivvy — error recovery</div>
+            </div>
+            <div class="terminal-body">
+<pre class="terminal-pre"><span class="terminal-error">✗ ruby failed:</span> bundle install exited 1
+
+How do you want to proceed?
+  <span class="terminal-cmd">[r]</span> Retry  <span class="terminal-comment">— run the step again</span>
+  <span class="terminal-accent">[f]</span> Fix    <span class="terminal-comment">— bundle update nokogiri</span>
+  <span class="terminal-cmd">[s]</span> Skip   <span class="terminal-comment">— continue without this step</span>
+  <span class="terminal-cmd">[x]</span> Shell  <span class="terminal-comment">— drop to shell to debug</span></pre>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <section class="languages" id="languages">
     <h2>Works with your stack</h2>
     <p>Built-in support for popular runtimes and package managers</p>
@@ -196,9 +280,9 @@
 
   <section class="cta" id="cta">
     <div class="cta-content">
-      <h2>Ready to pitch your tent?</h2>
+      <h2>Ready to set up camp?</h2>
       <p>
-        Set up Bivvy in under a minute. Your future teammates will thank you.
+        Bivvy gets you running right away and keeps things consistent with smart, shareable, idempotent configs.
       </p>
       <a href="/docs/" class="btn btn-primary">
         Get started →
@@ -214,7 +298,7 @@
         <a href="https://github.com/bivvy-dev/bivvy/issues" target="_blank">Issues</a>
       </div>
       <div class="footer-copy">
-        Brougt to you by ☕ and the bivvy community
+        Brought to you by ☕ and the bivvy community
       </div>
     </div>
   </footer>

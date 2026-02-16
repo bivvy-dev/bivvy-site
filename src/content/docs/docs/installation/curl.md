@@ -8,7 +8,7 @@ The quickest way to install Bivvy on macOS or Linux.
 ## Usage
 
 ```bash
-curl -fsSL https://bivvy.dev/install.sh | sh
+curl -fsSL https://bivvy.dev/install | sh
 ```
 
 ## What the Script Does
@@ -37,13 +37,13 @@ curl -fsSL https://bivvy.dev/install.sh | sh
 
 ```bash
 # Install latest
-curl -fsSL https://bivvy.dev/install.sh | sh
+curl -fsSL https://bivvy.dev/install | sh
 
 # Install specific version
-BIVVY_VERSION=v1.0.0 curl -fsSL https://bivvy.dev/install.sh | sh
+BIVVY_VERSION=v1.0.0 curl -fsSL https://bivvy.dev/install | sh
 
 # Install to custom directory
-BIVVY_INSTALL_DIR=/usr/local/bin curl -fsSL https://bivvy.dev/install.sh | sh
+BIVVY_INSTALL_DIR=/usr/local/bin curl -fsSL https://bivvy.dev/install | sh
 ```
 
 ## PATH Setup

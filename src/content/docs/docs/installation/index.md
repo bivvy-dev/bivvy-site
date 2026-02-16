@@ -9,7 +9,7 @@ native binary -- choose whichever fits your workflow.
 ## Quick Install (Recommended)
 
 ```bash
-curl -fsSL https://bivvy.dev/install.sh | sh
+curl -fsSL https://bivvy.dev/install | sh
 ```
 
 See [curl install docs](./curl.md) for options and troubleshooting.

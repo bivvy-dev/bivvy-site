@@ -484,6 +484,71 @@ nav::before {
   color: var(--accent-lime);
 }
 
+.hero-badge.tooltip-trigger {
+  position: relative;
+  cursor: default;
+}
+
+.badge-tooltip {
+  position: absolute;
+  bottom: calc(100% + 0.75rem);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  background: var(--bg-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
+
+/* Invisible bridge so hover doesn't break between badge and tooltip */
+.badge-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -0.75rem;
+  left: 0;
+  width: 100%;
+  height: 0.75rem;
+}
+
+.badge-tooltip::before {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background: var(--bg-secondary);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero-badge.tooltip-trigger:hover .badge-tooltip,
+.badge-tooltip:hover {
+  opacity: 1;
+  visibility: visible;
+}
+
+.badge-tooltip a {
+  color: var(--accent-lime);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.badge-tooltip a:hover {
+  text-decoration: underline;
+}
+
 .hero h1 {
   font-family: var(--font-display);
   font-size: clamp(3.5rem, 10vw, 7rem);
@@ -878,6 +943,94 @@ nav::before {
   color: var(--accent-coral);
 }
 
+/* Proof Section */
+.proof {
+  padding: 8rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.proof-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.proof-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .proof-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.proof-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.proof-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.proof-card > p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.proof-card > p code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  color: var(--accent-lime);
+}
+
+.terminal-compact {
+  flex: 1;
+}
+
+.terminal-compact .terminal-body {
+  padding: 1rem;
+}
+
+.terminal-pre {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.7;
+  margin: 0;
+  white-space: pre;
+  color: var(--text-secondary);
+}
+
+.terminal-key {
+  color: var(--accent-purple);
+}
+
+.terminal-string {
+  color: var(--accent-teal);
+}
+
+.terminal-warning {
+  color: #fbbf24;
+}
+
+.terminal-error {
+  color: var(--accent-coral);
+}
+
+.terminal-muted {
+  color: var(--text-muted);
+}
+
 /* Languages Section */
 .languages {
   padding: 8rem 2rem;
@@ -1228,7 +1381,7 @@ footer {
     padding: 0.75rem 1rem;
   }
 
-  .features, .languages, .cta {
+  .features, .languages, .cta, .proof {
     padding: 5rem 1.5rem;
   }
 
