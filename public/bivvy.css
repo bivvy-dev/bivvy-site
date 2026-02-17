@@ -595,7 +595,7 @@ nav::before {
   animation: fadeInUp 0.6s ease-out 0.1s both;
 }
 
-.hero h1 .highlight {
+.hero h1 .highlight, h2 .highlight {
   background: var(--gradient-rainbow);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

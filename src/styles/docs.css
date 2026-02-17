@@ -149,3 +149,11 @@ starlight-theme-select select {
   background: rgba(255, 255, 255, 0.05);
   font-weight: 600;
 }
+
+.sl-markdown-content :is(th:first-child, td:first-child):not(:where(.not-content *)) {
+  padding-inline-start: 0.75rem;
+}
+
+.sl-markdown-content :is(th:last-child, td:last-child):not(:where(.not-content *)) {
+  padding-inline-end: 0.75rem;
+}
