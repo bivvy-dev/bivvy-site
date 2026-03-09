@@ -261,6 +261,26 @@
     </div>
   </footer>
 
+  <!-- Search Modal -->
+  <div class="search-modal-overlay" id="search-overlay">
+    <div class="search-modal" id="search-modal">
+      <div class="search-modal-input-wrapper">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" class="search-modal-input" id="search-input" placeholder="Search docs, templates, plugins..." autocomplete="off" />
+        <kbd class="search-modal-esc">ESC</kbd>
+      </div>
+      <div class="search-modal-results" id="search-results">
+        <div class="search-no-results">Type to search documentation...</div>
+      </div>
+      <div class="search-modal-footer">
+        <span><kbd>↑↓</kbd> Navigate</span>
+        <span><kbd>↵</kbd> Select</span>
+        <span><kbd>ESC</kbd> Close</span>
+      </div>
+    </div>
+  </div>
+
   <script src="../atmosphere.js"></script>
+  <script src="../search-modal.js?v=2"></script>
 </body>
 </html>
