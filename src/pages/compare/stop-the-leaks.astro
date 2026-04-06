@@ -1,0 +1,9 @@
+---
+// Serve the static comparison page (needed because Starlight's catch-all
+// route intercepts it in dev mode).
+import fs from 'node:fs';
+import path from 'node:path';
+
+const html = fs.readFileSync(path.join(process.cwd(), 'public', 'compare', 'stop-the-leaks.html'), 'utf-8');
+---
+<Fragment set:html={html} />

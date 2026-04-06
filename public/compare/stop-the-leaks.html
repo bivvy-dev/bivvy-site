@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bivvy vs Setup Scripts – Replace bin/setup with something better</title>
-  <meta name="description" content="Bivvy replaces your bin/setup, script/bootstrap, and README-driven setup with declarative, idempotent, shareable environment configuration.">
+  <title>Stop the Leaks – How environment drift becomes a security vulnerability</title>
+  <meta name="description" content="The Claude Code source map leak happened because of environment drift. Bivvy locks your build tools, standardizes pre-flight checks, and eliminates ad-hoc deploys.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛺</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,85 +64,75 @@
   </nav>
 
   <section class="hero compare-hero">
-    <div class="compare-badge">Comparison</div>
-    <h1><span class="highlight">Bivvy </span><span class="vs">vs</span> Setup Scripts</h1>
+    <div class="compare-badge">Case Study</div>
+    <h1><span class="highlight">Stop </span>the Leaks</h1>
     <p class="deep-dive-text compare-subtitle">
-      Your <code>bin/setup</code> got you this far. Bivvy takes it the rest of the way  - with idempotency, change detection, shared configs, and CI parity baked in.
+      The Claude Code source map leak happened because of environment drift  - a build tool behaved differently than expected, and nobody caught it. Bivvy makes that kind of drift visible before it ships.
     </p>
   </section>
 
   <section class="differentiators">
     <div class="diff-grid">
       <div class="feature-card">
-        <div class="feature-icon">🔄</div>
-        <h3>Run it again without fear</h3>
-        <p>Setup scripts blindly re-run everything. Bivvy's <code>completed_check</code> detects what's already done and skips it. Safe to run a hundred times.</p>
+        <div class="feature-icon">📌</div>
+        <h3>Pin your build tools</h3>
+        <p>A runtime update introduced a bug that generated source maps even when told not to. Bivvy locks tool versions in <code>bivvy.yaml</code>  - the whole team builds with the same binary, every time.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">👀</div>
-        <h3>Knows when things changed</h3>
-        <p><code>watches</code> tracks your lockfiles. When <code>Gemfile.lock</code> changes, the Ruby step re-runs. When it hasn't, skip. No wasted time.</p>
+        <div class="feature-icon">🚧</div>
+        <h3>Bake in safety gates</h3>
+        <p>No one checked the <code>/dist</code> folder for <code>.map</code> files before publishing. Bivvy's built-in audit templates catch source maps, secrets, and debug symbols as a post-build step  - no extra tooling required.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">🏢</div>
-        <h3>Share across every repo</h3>
-        <p><code>extends:</code> lets your infra team publish a base config. Every repo inherits it. When the base updates, every project picks it up.</p>
+        <div class="feature-icon">🔒</div>
+        <h3>Kill the ad-hoc deploy</h3>
+        <p>Leaks happen when someone runs a manual build because CI was "acting up." Bivvy makes local setup fast and correct, so there's no reason to bypass the pipeline.</p>
       </div>
     </div>
   </section>
 
   <section class="compare-table-section">
     <div class="compare-table-container">
-      <div class="section-label">Feature comparison</div>
-      <h2>Side by side</h2>
+      <div class="section-label">What went wrong</div>
+      <h2>Drift vs. declared state</h2>
       <table class="compare-table">
         <thead>
           <tr>
-            <th>Capability</th>
-            <th>Bivvy</th>
-            <th>bin/setup</th>
+            <th>Risk</th>
+            <th>With Bivvy</th>
+            <th>Without Bivvy</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Idempotent</td>
-            <td><span class="check">Yes  - completed_check skips satisfied steps</span></td>
-            <td><span class="absent">Rarely  - most scripts re-run everything</span></td>
+            <td>Build tool version</td>
+            <td><span class="check">Pinned in bivvy.yaml, enforced on every machine</span></td>
+            <td><span class="absent">Whatever's installed locally</span></td>
           </tr>
           <tr>
-            <td>Change detection</td>
-            <td><span class="check">watches detects changed lockfiles</span></td>
-            <td><span class="absent">None  - runs the same regardless</span></td>
+            <td>Pre-publish checks</td>
+            <td><span class="check">Built-in audit templates catch source maps, secrets, debug symbols</span></td>
+            <td><span class="absent">Hoped-for, not guaranteed</span></td>
           </tr>
           <tr>
-            <td>Shared across repos</td>
-            <td><span class="check">extends: inherits from shared configs</span></td>
-            <td><span class="absent">Each repo has its own script</span></td>
+            <td>Local vs. CI parity</td>
+            <td><span class="check">Same config runs everywhere  - --non-interactive for CI</span></td>
+            <td><span class="absent">Different tools, different versions, different flags</span></td>
           </tr>
           <tr>
-            <td>CI support</td>
-            <td><span class="check">Same config, --non-interactive flag</span></td>
-            <td><span class="absent">Separate workflow file maintained in parallel</span></td>
+            <td>Ad-hoc deploys</td>
+            <td><span class="check">Local env is fast and correct  - no reason to skip the pipeline</span></td>
+            <td><span class="absent">Tempting when CI is slow or broken</span></td>
           </tr>
           <tr>
-            <td>Error handling</td>
-            <td><span class="check">depends_on lets independent steps continue</span></td>
-            <td><span class="absent">Stops on first failure</span></td>
+            <td>Environment visibility</td>
+            <td><span class="check">bivvy status shows every tool's state at a glance</span></td>
+            <td><span class="absent">No way to see what's actually installed</span></td>
           </tr>
           <tr>
-            <td>Discoverability</td>
-            <td><span class="check">bivvy status and bivvy list</span></td>
-            <td><span class="absent">Read the script source</span></td>
-          </tr>
-          <tr>
-            <td>Template reuse</td>
-            <td><span class="check">Built-in and remote template libraries</span></td>
-            <td><span class="absent">Copy-paste between repos</span></td>
-          </tr>
-          <tr>
-            <td>Interactive recovery</td>
-            <td><span class="check">Retry, fix, skip, or debug on failure</span></td>
-            <td><span class="absent">Script exits, figure it out</span></td>
+            <td>Onboarding a new machine</td>
+            <td><span class="check">bivvy run  - done</span></td>
+            <td><span class="absent">Follow the README, hope it's current</span></td>
           </tr>
         </tbody>
       </table>
@@ -152,36 +142,10 @@
   <section class="deep-dive">
     <div class="deep-dive-block">
       <div class="deep-dive-text">
-        <div class="section-label">The problem</div>
-        <h3>Setup scripts rot silently</h3>
-        <p>Every project starts with a fresh <code>bin/setup</code>. Six months later, someone adds a new dependency and forgets to update the script. The README says one thing, the script does another, and CI has its own version of reality.</p>
-        <p>Bivvy's declarative config is the single source of truth. <code>bivvy status</code> shows what's satisfied and what's not  - on any machine, at any time.</p>
-      </div>
-      <div class="terminal terminal-compact">
-        <div class="terminal-header">
-          <div class="terminal-dot red"></div>
-          <div class="terminal-dot yellow"></div>
-          <div class="terminal-dot green"></div>
-          <div class="terminal-title">bivvy status</div>
-        </div>
-        <div class="terminal-body">
-<pre class="terminal-pre"><span class="terminal-prompt">❯</span> <span class="terminal-cmd">bivvy status</span>
-
-  <span class="terminal-success">[✓]</span> brew         <span class="terminal-comment">2 hours ago</span>
-  <span class="terminal-warning">[!]</span> ruby         <span class="terminal-warning">stale (Gemfile.lock changed)</span>
-  <span class="terminal-success">[✓]</span> node         <span class="terminal-comment">2 hours ago</span>
-  <span class="terminal-success">[✓]</span> docker       <span class="terminal-comment">running</span>
-  <span class="terminal-muted">[pending]</span> db  <span class="terminal-muted">not yet run</span></pre>
-        </div>
-      </div>
-    </div>
-
-    <div class="deep-dive-block reverse">
-      <div class="deep-dive-text">
-        <div class="section-label">The difference</div>
-        <h3>Declarative, not imperative</h3>
-        <p>A setup script says "run these commands in order." Bivvy says "ensure this state exists." The difference matters when you run it the second time, the tenth time, or after pulling new changes.</p>
-        <p><code>completed_check</code> means bivvy knows whether a step's already done. <code>watches</code> means it knows when something changed. The result: fast, correct re-runs instead of "just run the whole thing again."</p>
+        <div class="section-label">Version pinning</div>
+        <h3>Lock the build engine</h3>
+        <p>The Claude Code leak was triggered by a bug in a specific version of the Bun runtime that generated source maps even when the config said not to. Somewhere between "it worked last week" and "ship it," the runtime changed.</p>
+        <p>Bivvy pins your tools to exact versions. If the declared version doesn't match what's installed, the step fails before any code gets built. No surprises, no "bleeding edge" regressions shipping to production.</p>
       </div>
       <div class="terminal terminal-compact">
         <div class="terminal-header">
@@ -192,51 +156,80 @@
         </div>
         <div class="terminal-body">
 <pre class="terminal-pre"><span class="terminal-key">steps</span>:
-  <span class="terminal-key">ruby</span>:
-    <span class="terminal-key">template</span>: bundler
-    <span class="terminal-key">watches</span>: [Gemfile.lock]
+  <span class="terminal-key">bun</span>:
+    <span class="terminal-key">command</span>: <span class="terminal-string">"mise install bun@1.1.38"</span>
     <span class="terminal-key">completed_check</span>:
-      <span class="terminal-key">command</span>: <span class="terminal-string">"bundle check"</span>
+      <span class="terminal-key">type</span>: command_succeeds
+      <span class="terminal-key">command</span>: <span class="terminal-string">"bun --version | grep -q '1.1.38'"</span>
 
-  <span class="terminal-key">node</span>:
-    <span class="terminal-key">template</span>: yarn
-    <span class="terminal-key">watches</span>: [yarn.lock]
-
-  <span class="terminal-key">db</span>:
-    <span class="terminal-key">command</span>: <span class="terminal-string">"rails db:prepare"</span>
-    <span class="terminal-key">depends_on</span>: [ruby, docker]</pre>
+  <span class="terminal-key">build</span>:
+    <span class="terminal-key">command</span>: <span class="terminal-string">"bun run build"</span>
+    <span class="terminal-key">depends_on</span>: [bun]
+    <span class="terminal-key">watches</span>: [src/, package.json]</pre>
         </div>
       </div>
     </div>
 
-    <div class="deep-dive-block">
+    <div class="deep-dive-block reverse">
       <div class="deep-dive-text">
-        <div class="section-label">The upgrade path</div>
-        <h3>From script to config in minutes</h3>
-        <p>You don't have to rewrite anything. Run <code>bivvy init</code> in your project and bivvy detects your stack, generates a config from built-in templates, and works immediately.</p>
-        <p>Your existing setup logic becomes declarative steps with completion checks. Same outcome, better ergonomics. And once it works for one repo, <code>extends:</code> lets you share the pattern across your entire org.</p>
+        <div class="section-label">Artifact audits</div>
+        <h3>Check before you ship</h3>
+        <p>The missing safety gate was simple: nobody verified that the <code>/dist</code> folder was clean before <code>npm publish</code> ran. A file-check step would have caught the <code>.map</code> files in seconds.</p>
+        <p>Bivvy ships with built-in audit templates for every major ecosystem  - Node, Rust, Python, Go, Java, .NET, Docker, Ruby, PHP, Elixir, and Swift. Add one as a post-build step with <code>depends_on</code>, and it runs automatically as a safety gate. No extra tooling to install, no scripts to maintain.</p>
       </div>
       <div class="terminal terminal-compact">
         <div class="terminal-header">
           <div class="terminal-dot red"></div>
           <div class="terminal-dot yellow"></div>
           <div class="terminal-dot green"></div>
-          <div class="terminal-title">bivvy init</div>
+          <div class="terminal-title">.bivvy/config.yml</div>
         </div>
         <div class="terminal-body">
-<pre class="terminal-pre"><span class="terminal-prompt">❯</span> <span class="terminal-cmd">bivvy init</span>
+<pre class="terminal-pre"><span class="terminal-key">steps</span>:
+  <span class="terminal-key">deps</span>:
+    <span class="terminal-key">template</span>: npm-install
 
-  ⛺ <span class="terminal-accent">bivvy</span> init
+  <span class="terminal-key">build</span>:
+    <span class="terminal-key">template</span>: vite-build
+    <span class="terminal-key">depends_on</span>: [deps]
 
-  <span class="terminal-comment"># Detecting project...</span>
-  <span class="terminal-success">✓</span> Ruby 3.2.2 (bundler)
-  <span class="terminal-success">✓</span> Node 20.11.0 (yarn)
-  <span class="terminal-success">✓</span> PostgreSQL (docker-compose)
+  <span class="terminal-key">audit</span>:
+    <span class="terminal-key">template</span>: node-artifact-audit
+    <span class="terminal-key">depends_on</span>: [build]
+    <span class="terminal-key">inputs</span>:
+      <span class="terminal-key">dist_dir</span>: dist
 
-  <span class="terminal-success">✓</span> Created .bivvy/config.yml
-  <span class="terminal-comment">  3 steps configured from templates</span>
+<span class="terminal-comment"># Catches source maps, .env files,</span>
+<span class="terminal-comment"># secrets in JS, node_modules in dist,</span>
+<span class="terminal-comment"># and TypeScript source leaks.</span></pre>
+        </div>
+      </div>
+    </div>
 
-  Run <span class="terminal-cmd">bivvy run</span> to set up.</pre>
+    <div class="deep-dive-block">
+      <div class="deep-dive-text">
+        <div class="section-label">The real fix</div>
+        <h3>Same machine, everywhere</h3>
+        <p>Leaks don't usually happen because someone did something malicious. They happen because someone's local environment drifted from what CI expected, or because CI was down and someone ran a manual build "just this once."</p>
+        <p>Bivvy makes the right path the easy path. When setup is fast, reliable, and identical everywhere, there's no friction that tempts someone to bypass the pipeline. Your laptop becomes just as controlled as the build server  - same tools, same versions, same checks.</p>
+      </div>
+      <div class="terminal terminal-compact">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <div class="terminal-title">terminal</div>
+        </div>
+        <div class="terminal-body">
+<pre class="terminal-pre"><span class="terminal-prompt">❯</span> <span class="terminal-cmd">bivvy status</span>
+
+  <span class="terminal-success">[✓]</span> bun          <span class="terminal-comment">v1.1.38 pinned</span>
+  <span class="terminal-success">[✓]</span> deps         <span class="terminal-comment">up to date</span>
+  <span class="terminal-success">[✓]</span> build        <span class="terminal-comment">clean</span>
+  <span class="terminal-success">[✓]</span> audit        <span class="terminal-comment">passed  - no leaks detected</span>
+
+  <span class="terminal-accent">Environment matches declared state.</span>
+  <span class="terminal-comment">Ready to ship.</span></pre>
         </div>
       </div>
     </div>
@@ -244,8 +237,8 @@
 
   <section class="compare-cta">
     <div class="compare-cta-content">
-      <h2>Ready to <span class="highlight">retire </span>bin/setup?</h2>
-      <p>Bivvy is what your setup script would be if someone designed it as a product instead of a one-off script.</p>
+      <h2>Untracked state is a <span class="highlight">security vulnerability</span></h2>
+      <p>If your environment isn't declared in code, you're just vibing with your infrastructure. Bivvy moves setup out of the realm of vibes and into reproducible engineering.</p>
       <div class="btn-row">
         <a href="/docs/" class="btn btn-primary">Get started →</a>
         <a href="https://github.com/bivvy-dev/bivvy" class="btn btn-secondary" target="_blank">
@@ -259,6 +252,7 @@
   <section class="also-compare">
     <h3 class="compare-badge">Also compare</h3>
     <div class="also-compare-links">
+      <a href="/compare/setup-scripts">vs Setup Scripts</a>
       <a href="/compare/task-runners">vs Make, Just, & Taskfiles</a>
       <a href="/compare/nix-devcontainers">vs Nix & Devcontainers</a>
       <a href="/compare/config-management">vs Ansible, Chef, & Puppet</a>
@@ -274,7 +268,7 @@
         <a href="https://github.com/bivvy-dev/bivvy/issues" target="_blank">Issues</a>
         <a href="/compare/setup-scripts">vs Setup Scripts</a>
         <a href="/compare/task-runners">vs Make, Just, & Taskfiles</a>
-        <a href="/compare/nix-devcontainers">vs Nix & Devcontainers</a>
+        <a href="/compare/stop-the-leaks">Stop the Leaks</a>
       </div>
       <div class="footer-copy">
         Brought to you by ☕ and the bivvy community

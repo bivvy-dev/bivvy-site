@@ -44,6 +44,7 @@
           <a href="#demo">How it works</a>
           <a href="#proof">In the wild</a>
           <a href="#languages">In your stack</a>
+          <a href="#stop-the-leaks">Stop the leaks</a>
           <a href="#cta">Get started</a>
         </div>
       </div>
@@ -125,7 +126,7 @@
       <div class="feature-card">
         <div class="feature-icon">🔍</div>
         <h3 data-spark="coral">Auto-Detects Your Stack</h3>
-        <p>Point bivvy at a project and it scans your machine for installed tools, runtimes, and services — then generates a config to match. Run it again and it only does what's needed.</p>
+        <p>Point bivvy at a project and it scans your machine for installed tools, runtimes, and services  - then generates a config to match. Run it again and it only does what's needed.</p>
       </div>
     </div>
   </section>
@@ -138,7 +139,7 @@
         <p>
           Bivvy reads your project's .bivvy/config.yml and walks through each
           setup step interactively. Dependencies, environment variables,
-          databases, services—all handled.
+          databases, services - all handled.
         </p>
             <ul class="demo-features" id="demo-features">
           <li data-star-sequence="0" data-glow="lime"><span class="list-star" style="--glow-color: rgba(200, 255, 0, 0.6)"></span>Automatically detects your runtime versions</li>
@@ -152,7 +153,7 @@
           <div class="terminal-dot red"></div>
           <div class="terminal-dot yellow"></div>
           <div class="terminal-dot green"></div>
-          <div class="terminal-title">bivvy — ~/projects/my-app</div>
+          <div class="terminal-title">bivvy -~/projects/my-app</div>
         </div>
         <div class="terminal-body">
           <div class="terminal-line">
@@ -253,16 +254,16 @@
               <div class="terminal-dot red"></div>
               <div class="terminal-dot yellow"></div>
               <div class="terminal-dot green"></div>
-              <div class="terminal-title">bivvy — error recovery</div>
+              <div class="terminal-title">bivvy -error recovery</div>
             </div>
             <div class="terminal-body">
 <pre class="terminal-pre"><span class="terminal-error">✗ ruby failed:</span> bundle install exited 1
 
 How do you want to proceed?
-  <span class="terminal-cmd">[r]</span> Retry  <span class="terminal-comment">— run the step again</span>
-  <span class="terminal-accent">[f]</span> Fix    <span class="terminal-comment">— bundle update nokogiri</span>
-  <span class="terminal-cmd">[s]</span> Skip   <span class="terminal-comment">— continue without this step</span>
-  <span class="terminal-cmd">[x]</span> Shell  <span class="terminal-comment">— drop to shell to debug</span></pre>
+  <span class="terminal-cmd">[r]</span> Retry  <span class="terminal-comment"> - run the step again</span>
+  <span class="terminal-accent">[f]</span> Fix    <span class="terminal-comment"> - bundle update nokogiri</span>
+  <span class="terminal-cmd">[s]</span> Skip   <span class="terminal-comment"> - continue without this step</span>
+  <span class="terminal-cmd">[x]</span> Shell  <span class="terminal-comment"> - drop to shell to debug</span></pre>
             </div>
           </div>
         </div>
@@ -287,6 +288,54 @@ How do you want to proceed?
       <span class="lang-pill">asdf</span>
       <span class="lang-pill">mise</span>
       <span class="lang-pill">nvm</span>
+    </div>
+  </section>
+
+  <section class="stop-the-leaks" id="stop-the-leaks">
+    <div class="stop-the-leaks-container">
+      <div class="stop-the-leaks-content">
+        <div class="section-label">Artifact audits</div>
+        <h2 class="section-title">Stop the leaks<span class="spark-period">.</span></h2>
+        <p>
+          Source maps in production. Secrets baked into build output. Debug symbols shipping to users.
+          These aren't edge cases  - they're what happens when your build environment drifts and nobody checks the artifacts.
+        </p>
+        <p>
+          Bivvy ships with <strong>built-in audit templates</strong> for Node, Rust, Python, Go, Java, .NET, Docker, Ruby, PHP, Elixir, and Swift.
+          They run as post-build safety gates  - automatically checking your <code>/dist</code> for source maps, <code>.env</code> files, debug symbols, and hardcoded secrets before anything gets published.
+        </p>
+        <div class="stop-the-leaks-actions">
+          <a href="/compare/stop-the-leaks" class="btn btn-primary">See how it works →</a>
+          <a href="/docs/guides/artifact-audits" class="btn btn-secondary">Read the guide</a>
+        </div>
+      </div>
+      <div class="terminal terminal-compact">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <div class="terminal-title">.bivvy/config.yml</div>
+        </div>
+        <div class="terminal-body">
+<pre class="terminal-pre"><span class="terminal-key">steps</span>:
+  <span class="terminal-key">deps</span>:
+    <span class="terminal-key">template</span>: npm-install
+
+  <span class="terminal-key">build</span>:
+    <span class="terminal-key">template</span>: vite-build
+    <span class="terminal-key">depends_on</span>: [deps]
+
+  <span class="terminal-key">audit</span>:
+    <span class="terminal-key">template</span>: node-artifact-audit
+    <span class="terminal-key">depends_on</span>: [build]
+    <span class="terminal-key">inputs</span>:
+      <span class="terminal-key">dist_dir</span>: dist
+
+<span class="terminal-comment"># Catches source maps, .env files,</span>
+<span class="terminal-comment"># secrets in JS/JSON, node_modules</span>
+<span class="terminal-comment"># in dist, and TypeScript source leaks.</span></pre>
+        </div>
+      </div>
     </div>
   </section>
 
